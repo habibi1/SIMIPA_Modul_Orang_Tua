@@ -1,0 +1,26 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="height_card_schedule">55dp</dimen>
+    <dimen name="teks_size_card_schedule">15sp</dimen>
+    <dimen name="card_hight_presence">120dp</dimen>
+    <dimen name="logo_all_presence">100dp</dimen>
+    <dimen name="card_teks_size_presence">15sp</dimen>
+    <dimen name="size_title_toolbar">19sp</dimen>
+    <dimen name="text_size_title_toolbar">19sp</dimen>
+    <dimen name="margin_top_object_layout">30dp</dimen>
+    <dimen name="text_size_title_big">30sp</dimen>
+    <dimen name="radius_extra">15dp</dimen>
+    <dimen name="radius_extra_minus">-15dp</dimen>
+    <dimen name="text_size_normal">12pt</dimen>
+    <dimen name="text_value_dialog">18sp</dimen>
+    <dimen name="dialog_mini_title">12sp</dimen>
+    <dimen name="pading_detail_with_icon">6dp</dimen>
+    <dimen name="margin_icon_with_text">6dp</dimen>
+    <dimen name="margin_image_center_with_text_bottom">6dp</dimen>
+    <dimen name="margin_text_in_item">3dp</dimen>
+    <dimen name="padding_drawable_with_text_in_item">6dp</dimen>
+    <dimen name="color_detail_in_schedule">6dp</dimen>
+    <dimen name="chart_height">250dp</dimen>
+</resources>

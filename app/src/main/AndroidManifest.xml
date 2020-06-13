@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.unila.ilkomp.simipaforparents">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <uses-feature
+        android:name="android.hardware.Camera2"
+        android:required="true" />
+
+    <permission
+        android:name="com.unila.ilkomp.simipaforparents.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.unila.ilkomp.simipaforparents.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".ImportantDateActivity"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PresenceSeminarDetailActivity" />
+        <activity
+            android:name=".VerifyPhoneNumberActivity"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AddPhotoProfileActivity" />
+        <activity
+            android:name=".SPPActivity"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ScholarshipActivity"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddMahasiswaActivity"
+            android:parentActivityName=".LoginActivity" />
+        <activity android:name=".ListStudentsActivity" />
+        <activity
+            android:name=".SignUpActivity"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AchievementActivity"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StudyProgressActivity"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PresenceActivity"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ScheduleActivity"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".IntroActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashscreenActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.unila.ilkomp.simipaforparents"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <service
+            android:name=".service.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="TODO"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".receiver.NotificationApprovedRequestReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

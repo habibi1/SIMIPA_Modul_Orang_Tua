@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <FrameLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_background_center">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/txtclose"
+            android:layout_margin="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/x"
+            android:textStyle="bold"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:background="@drawable/circle_background"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="6dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_student"
+                    android:layout_width="109dp"
+                    android:layout_height="108dp"
+                    android:layout_marginTop="@dimen/margin_top_object_layout"
+                    android:src="@drawable/ic_person_profil_white_200dp"
+                    android:background="@drawable/logo_gradient_background" />
+
+                <TextView
+                    android:id="@+id/tv_nama_mahasiswa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Mahasiswa"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_value_dialog"/>
+
+                <TextView
+                    android:id="@+id/tv_npm_mahasiswa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NPM Mahasiswa"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_value_dialog"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="10dp">
+
+                    <ImageView
+                        android:id="@+id/iv_status_beasiswa"
+                        android:padding="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_check_circle_green_30dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_status"
+                        android:padding="3dp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status"
+                        android:textSize="@dimen/text_value_dialog"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/pading_detail_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_marginEnd="@dimen/margin_icon_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_beasiswa"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nama_beasiswa"
+                        android:textSize="@dimen/dialog_mini_title"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tv_nama_beasiswa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nama_beasiswa"
+                        android:textSize="@dimen/text_value_dialog"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/pading_detail_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_marginEnd="@dimen/margin_icon_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_jenis_beasiswa"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jenis_beasiswa"
+                        android:textSize="@dimen/dialog_mini_title"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tv_jenis_beasiswa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jenis_beasiswa"
+                        android:textSize="@dimen/text_value_dialog"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/pading_detail_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_marginEnd="@dimen/margin_icon_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_event_available_blue_24dp"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tahun"
+                        android:textSize="@dimen/dialog_mini_title"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tv_tahun_beasiswa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tahun"
+                        android:textSize="@dimen/text_value_dialog"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/pading_detail_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_marginEnd="@dimen/margin_icon_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_semester"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/semester"
+                        android:textSize="@dimen/dialog_mini_title"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tv_semester_beasiswa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/semester"
+                        android:textSize="@dimen/text_value_dialog"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/pading_detail_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_marginEnd="@dimen/margin_icon_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_subject_blue_40dp"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/keterangan_beasiswa"
+                        android:textSize="@dimen/dialog_mini_title"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tv_keterangan_beasiswa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/keterangan_beasiswa"
+                        android:textSize="@dimen/text_value_dialog"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</ScrollView>

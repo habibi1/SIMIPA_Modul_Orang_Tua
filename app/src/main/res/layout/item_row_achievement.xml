@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_achievement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="6dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="6dp">
+
+                <ImageView
+                    android:id="@+id/medal"
+                    android:padding="6dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_medal_black"/>
+
+                <TextView
+                    android:id="@+id/tv_juara"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Juara"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="6dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/line_vertical"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingLeft="5dp">
+
+                <TextView
+                    android:id="@+id/tv_nama_acara"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_text_in_item"
+                    android:text="Achievement"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:drawablePadding="6dp"
+                    android:drawableStart="@drawable/ic_star_blue_24dp"/>
+
+                <TextView
+                    android:id="@+id/tv_tingkat"
+                    android:gravity="center_vertical"
+                    android:layout_margin="@dimen/margin_text_in_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tingkat"
+                    android:drawablePadding="6dp"
+                    android:drawableStart="@drawable/ic_globe_24dp"/>
+
+                <TextView
+                    android:id="@+id/tv_tahun"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_text_in_item"
+                    android:text="Tahun"
+                    android:drawablePadding="6dp"
+                    android:drawableStart="@drawable/ic_event_available_24"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/line_horizontal"
+        android:scaleType="fitXY"/>
+
+</LinearLayout>

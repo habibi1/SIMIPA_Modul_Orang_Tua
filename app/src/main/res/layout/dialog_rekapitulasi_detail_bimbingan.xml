@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <FrameLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_background_center">
+
+        <TextView
+            android:id="@+id/txtclose"
+            android:layout_margin="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/x"
+            android:textStyle="bold"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:background="@drawable/circle_background"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="6dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_student"
+                    android:layout_width="109dp"
+                    android:layout_height="108dp"
+                    android:layout_marginTop="@dimen/margin_top_object_layout"
+                    android:layout_marginBottom="@dimen/margin_image_center_with_text_bottom"
+                    android:src="@drawable/ic_person_profil_white_200dp"
+                    android:background="@drawable/logo_gradient_background" />
+
+                <TextView
+                    android:id="@+id/tv_nama_mahasiswa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Mahasiswa"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_value_dialog"/>
+
+                <TextView
+                    android:id="@+id/tv_npm_mahasiswa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NPM Mahasiswa"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_value_dialog"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="10dp">
+
+                    <ImageView
+                        android:id="@+id/iv_status_beasiswa"
+                        android:padding="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_check_circle_green_30dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_status"
+                        android:padding="3dp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/selesai"
+                        android:textSize="@dimen/text_value_dialog"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/pading_detail_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_marginEnd="@dimen/margin_icon_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_seminar_blue_40dp"/>
+
+                <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jenis_seminar"
+                    android:textSize="@dimen/dialog_mini_title"
+                    android:textColor="@color/colorPrimary"/>
+
+                <TextView
+                    android:id="@+id/tv_jenis_seminar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jenis_seminar"
+                    android:textSize="@dimen/text_value_dialog"
+                    android:textColor="@color/colorBlack"/>
+
+            </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/pading_detail_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="@dimen/margin_icon_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_books_blue_40dp"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/judul_seminar"
+                        android:textSize="@dimen/dialog_mini_title"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tv_judul_seminar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/judul_seminar"
+                        android:textSize="@dimen/text_value_dialog"
+                        android:textColor="@color/colorBlack"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/pading_detail_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_marginEnd="@dimen/margin_icon_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_access_time_blue_40dp"/>
+
+                <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/waktu"
+                    android:textSize="@dimen/dialog_mini_title"
+                    android:textColor="@color/colorPrimary"/>
+
+                <TextView
+                    android:id="@+id/tv_waktu_seminar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/waktu"
+                    android:textSize="@dimen/text_value_dialog"
+                    android:textColor="@color/colorBlack"/>
+
+            </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/pading_detail_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_marginEnd="@dimen/margin_icon_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_event_available_blue_24dp"/>
+
+                <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tanggal"
+                    android:textSize="@dimen/dialog_mini_title"
+                    android:textColor="@color/colorPrimary"/>
+
+                <TextView
+                    android:id="@+id/tv_tanggal_seminar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tanggal"
+                    android:textSize="@dimen/text_value_dialog"
+                    android:textColor="@color/colorBlack"/>
+
+            </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/pading_detail_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_marginEnd="@dimen/margin_icon_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_place_blue_40dp"/>
+
+                <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ruang_seminar"
+                    android:textSize="@dimen/dialog_mini_title"
+                    android:textColor="@color/colorPrimary"/>
+
+                <TextView
+                    android:id="@+id/tv_ruang_seminar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ruang_seminar"
+                    android:textSize="@dimen/text_value_dialog"
+                    android:textColor="@color/colorBlack"/>
+
+            </LinearLayout>
+            </LinearLayout>
+
+<!--            <LinearLayout
+                android:padding="@dimen/pading_detail_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="@dimen/margin_icon_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_photo_blue_40dp"/>
+
+                <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/berita_acara"
+                    android:textSize="@dimen/dialog_mini_title"
+                    android:textColor="@color/colorPrimary"/>
+
+                <ImageView
+                    android:id="@+id/iv_berita_acara"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBackgrounnd"
+                    android:src="@drawable/ic_image_grey_24dp" />
+
+            </LinearLayout>
+
+            </LinearLayout>-->
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</ScrollView>

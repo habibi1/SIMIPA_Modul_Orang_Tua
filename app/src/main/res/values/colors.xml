@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0093E9</color>
+    <color name="colorPrimaryDark">#0093E9</color>
+    <color name="colorAccent">#BCE0FD</color>
+    <color name="colorAccent2">#F1F9FF</color>
+    <color name="colorAccent3">#50A2E3</color>
+
+    <color name="colorBackgrounnd">#F5F5F5</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorRed">#C77070</color>
+    <color name="colorYellow">#CDDC39</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorGrey">#939393</color>
+    <color name="color_seminar_kp_unclick">#84DF87</color>
+    <color name="color_seminar_usul_unclick">#84C2DF</color>
+    <color name="color_seminar_hasil_unclick">#DF8484</color>
+    <color name="color_seminar_kp_click">#238827</color>
+    <color name="color_seminar_usul_click">#235C88</color>
+    <color name="color_seminar_hasil_click">#882323</color>
+    <color name="semi_transparent_40">#40FFFFFF</color>
+    <color name="ic_camera_background">#00FFFFFF</color>
+    <color name="ic_gallery_background">#00FFFFFF</color>
+
+    <color name="line_chart_1">#03A9F4</color>
+    <color name="line_chart_2">#3F51B5</color>
+
+    <color name="pie_chart_A">#005005</color>
+    <color name="pie_chart_B_">#2e7d32</color>
+    <color name="pie_chart_B">#49AE4F</color>
+    <color name="pie_chart_C_">#A3C800</color>
+    <color name="pie_chart_C">#D3B810</color>
+    <color name="pie_chart_D">#EA8B00</color>
+    <color name="pie_chart_E">#DF0000</color>
+
+    <array name="array_dot_active">
+        <item>#FFFFFF</item>
+        <item>#FFFFFF</item>
+        <item>#FFFFFF</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>#818181</item>
+        <item>#818181</item>
+        <item>#818181</item>
+    </array>
+</resources>

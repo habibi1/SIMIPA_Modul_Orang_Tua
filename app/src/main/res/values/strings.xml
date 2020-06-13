@@ -1,0 +1,192 @@
+<resources>
+    <string name="app_name">SIMIPA</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_kalender_akademik">Kalender Akademik</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_profile">Profil</string>
+    <string name="time_schedule">07.30–9.10</string>
+    <string name="name_schedule">Name Schedule</string>
+    <string name="card_kehadiran_perkuliahan">Perkuliahan</string>
+    <string name="card_kehadiran_praktikum">Praktikum</string>
+    <string name="card_kehadiran_seminar">Seminar</string>
+    <string name="card_kehadiran_bimbingan">Bimbingan</string>
+    <string name="h">H</string>
+    <string name="min">Min</string>
+    <string name="percent">%</string>
+    <string name="th">TH</string>
+    <string name="p">P</string>
+    <string name="nol">0</string>
+    <string name="register">Register</string>
+    <string name="title_prestasi">Prestasi</string>
+    <string name="nama">Name</string>
+    <string name="npm">NPM</string>
+    <string name="akademik">Akademik</string>
+    <string name="non_akademik">Non Akademik</string>
+    <string name="intro_next">Lanjut</string>
+    <string name="intro_skip">Lewati</string>
+    <string name="todo">TODO</string>
+    <string name="login">LOGIN</string>
+    <string name="telepon">Telepon</string>
+    <string name="password">Password</string>
+    <string name="login_lowercase">Login</string>
+    <string name="presensi">Kehadiran</string>
+    <string name="daftar_mahasiswa">Daftar Mahasiswa</string>
+    <string name="npm_mahasiswa">NPM Mahasiswa</string>
+    <string name="tambah">Tambah</string>
+    <string name="masukkan_npm_mahasiswa">Masukkan NPM Mahasiswa</string>
+    <string name="keluar">Keluar</string>
+    <string name="harus_diisi">Harus diisi!</string>
+
+    <string-array name="options_semester">
+        <item>Semester Ganjil</item>
+        <item>Semester Genap</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_scholarship">Beasiswa</string>
+    <string name="kalender_akademik">Kalender Akademik\nTahun Ajaran 2016/2017</string>
+    <string name="prestasi">Prestasi</string>
+    <string name="desc_foto_profil_orang_tua">Foto profil orang tua</string>
+    <string name="desc_ganti_foto_profil_orang_tua">Tombol ganti foto profil orang tua</string>
+    <string name="nama_orang_tua">Nama orang tua</string>
+    <string name="nomor_telepon_orang_tua">nomor telepon orang tua</string>
+    <string name="hapus_mahasiswa">Hapus Mahasiswa</string>
+    <string name="bantuan">Bantuan</string>
+    <string name="desc_gone" />
+    <string name="tambah_mahasiswa">Tambah Mahasiswa</string>
+    <string name="logo_aplikasi">Logo aplikasi</string>
+    <string name="rekapitulasi">Rekapitulasi</string>
+    <string name="spp">SPP</string>
+    <string name="segera_hadir">Segera Hadir</string>
+    <string name="jadwal">Jadwal</string>
+    <string name="beasiswa">Beasiswa</string>
+    <string name="harap_mengisi">Harap mengisi semua formulir</string>
+    <string name="nomor_telepon">Nomor Telepon</string>
+    <string name="foto_profil">Foto profil</string>
+    <string name="verifikasi_telepon">Verifikasi Telepon</string>
+    <string name="kode">Kode</string>
+    <string name="verifikasi">Verifikasi</string>
+    <string name="kirim_ulang_kode">Kirim Ulang Kode</string>
+    <string name="waktu">Waktu</string>
+    <string name="x">X</string>
+    <string name="pilih_foto">Pilih Foto</string>
+    <string name="kamera">Kamera</string>
+    <string name="galeri">Galeri</string>
+    <string name="timer">timer</string>
+    <string name="kode_negara">Kode Negara</string>
+    <string name="_62">+62</string>
+    <string name="plus">+</string>
+    <string name="button_tambah_foto_profile">Button tambah foto profile</string>
+    <string name="tambah_foto_profil">Tambah Foto Profil</string>
+    <string name="ubah_foto_profil">Ubah Foto Profil</string>
+    <string name="lewati">Lewati</string>
+    <string name="nomor_usulan">Nomor usulan</string>
+    <string name="nama_beasiswa">Nama beasiswa</string>
+    <string name="jenis_beasiswa">Jenis beasiswa</string>
+    <string name="tahun">Tahun</string>
+    <string name="semester">Semester</string>
+    <string name="keterangan_beasiswa">Keterangan beasiswa</string>
+    <string name="nama_kegiatan">Nama kegiatan</string>
+    <string name="tingkat">Tingkat</string>
+    <string name="penyelenggara">Penyelenggara</string>
+    <string name="jabatan">Jabatan</string>
+    <string name="status">Status</string>
+    <string name="seminar_usul">Seminar Usul</string>
+    <string name="data">data</string>
+    <string name="seminar_hasil">Seminar Hasil</string>
+    <string name="komprehensif">Komprehensif</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="detail">Detail</string>
+    <string name="jenis_seminar">Jenis Seminar</string>
+    <string name="nama_mahasiswa">Nama Mahasiswa</string>
+    <string name="judul_seminar">Judul Seminar</string>
+    <string name="ruang_seminar">Ruang Seminar</string>
+    <string name="jumlah_peserta">Jumlah Peserta</string>
+    <string name="berita_acara">Berita Acara</string>
+    <string name="selesai">Selesai</string>
+    <string name="tanggal_penting">Tanggal Penting</string>
+    <string name="jurusan">Jurusan</string>
+    <string name="daftar_semua_seminar">Daftar Semua Seminar</string>
+    <string name="teks_konfirmasi_hapus">Apakah anda yakin untuk menghapus mahasiswa tersebut dari daftar anda?</string>
+    <string name="hapus">Hapus</string>
+    <string name="batal">Batal</string>
+    <string name="lihat">Lihat</string>
+
+    <string name="data_kosong">Data Kosong</string>
+    <string name="tanggal_lahir">Tanggal Lahir</string>
+    <string name="tempat_lahir">Tempat Lahir</string>
+    <string name="agama">Agama</string>
+    <string name="email">Email</string>
+    <string name="jenis_kelamin">Jenis Kelamin</string>
+
+    <string name="januari">Januari</string>
+    <string name="februari">Februari</string>
+    <string name="maret">Maret</string>
+    <string name="april">April</string>
+    <string name="mei">Mei</string>
+    <string name="juni">Juni</string>
+    <string name="juli">Juli</string>
+    <string name="agustus">Agustus</string>
+    <string name="september">September</string>
+    <string name="oktober">Oktober</string>
+    <string name="november">November</string>
+    <string name="desember">Desember</string>
+    <string name="sks">SKS</string>
+    <string name="ips">IPS</string>
+    <string name="_2016_ganjil">2016 Ganjil</string>
+    <string name="_12">12</string>
+    <string name="perbandingan_nilai">Perbandingan Nilai</string>
+
+    <string name="server_error">Gagal terhubung ke server!</string>
+    <string name="terjadi_kesalahan">Terjadi kesalahan!</string>
+    <string name="gagal_dihapus">Gagal dihapus. Coba lagi!</string>
+    <string name="gagal_ditolak">Gagal ditolak. Coba lagi!</string>
+    <string name="gagal_disetujui">Gagal dikonfirmasi. Coba lagi!</string>
+    <string name="berhasil_dihapus">Data permintaan dihapus</string>
+    <string name="berhasil_ditolak">Data permintaan ditolak</string>
+    <string name="berhasil_disetujui">Data permintaan dikonfirmasi</string>
+
+    <!--Start notification for parent-->
+    <string name="parent_notification_channel_name_1">PARENT_CHANNEL_SIMIPA_REQUEST</string>
+    <string name="parent_notification_channel_name_2">PARENT_CHANNEL_SIMIPA_DELETE</string>
+    <string name="parent_notification_channel_name_3">PARENT_CHANNEL_SIMIPA_REJECT</string>
+    <string name="parent_notification_channel_name_4">PARENT_CHANNEL_SIMIPA_APPROVED</string>
+    <string name="parent_notification_channel_id_1">PARENT_CHANNEL_SIMIPA_1</string>
+    <string name="parent_notification_channel_id_2">PARENT_CHANNEL_SIMIPA_2</string>
+    <string name="parent_notification_channel_id_3">PARENT_CHANNEL_SIMIPA_3</string>
+    <string name="parent_notification_channel_id_4">PARENT_CHANNEL_SIMIPA_4</string>
+    <string name="parent_notification_group_name_1">PARENT_GROUP_SIMIPA_REQUEST</string>
+    <string name="parent_notification_group_name_2">PARENT_GROUP_SIMIPA_DELETE</string>
+    <string name="parent_notification_group_name_3">PARENT_GROUP_SIMIPA_REJECT</string>
+    <string name="parent_notification_group_name_4">PARENT_GROUP_SIMIPA_APPROVED</string>
+    <string name="parent_notification_group_id_1">PARENT_GROUP_SIMIPA_1</string>
+    <string name="parent_notification_group_id_2">PARENT_GROUP_SIMIPA_2</string>
+    <string name="parent_notification_group_id_3">PARENT_GROUP_SIMIPA_3</string>
+    <string name="parent_notification_group_id_4">PARENT_GROUP_SIMIPA_4</string>
+    <string name="parent_notification_title_id_1">TBA</string>
+    <string name="parent_notification_title_id_2">Akses dihapus mahasiswa</string>
+    <string name="parent_notification_title_id_3">Permintaan ditolak</string>
+    <string name="parent_notification_title_id_4">Permintaan dikonfirmasi</string>
+    <string name="parent_notification_message_id_1">TBA</string>
+    <string name="parent_notification_message_id_2">menghapus anda dalam daftar perizinan akses data perkuliahannya.</string>
+    <string name="parent_notification_message_id_3">menolak permintaan anda untuk mengakses data perkuliahannya.</string>
+    <string name="parent_notification_message_id_4">mengkonfirmasi permintaan anda untuk mengakses data perkuliahannya.</string>
+    <!--End notification for parent-->
+
+    <!--Start notification for student-->
+    <string name="student_notification_channel_name_1">STUDENT_CHANNEL_SIMIPA_REQUEST</string>
+    <string name="student_notification_channel_name_2">STUDENT_CHANNEL_SIMIPA_DELETE</string>
+    <string name="student_notification_channel_id_1">STUDENT_CHANNEL_SIMIPA_1</string>
+    <string name="student_notification_channel_id_2">STUDENT_CHANNEL_SIMIPA_2</string>
+    <string name="student_notification_group_name_1">STUDENT_GROUP_SIMIPA_REQUEST</string>
+    <string name="student_notification_group_name_2">STUDENT_GROUP_SIMIPA_DELETE</string>
+    <string name="student_notification_group_id_1">STUDENT_GROUP_SIMIPA_1</string>
+    <string name="student_notification_group_id_2">STUDENT_GROUP_SIMIPA_2</string>
+    <string name="student_notification_title_id_1">Permintaan akses data</string>
+    <string name="student_notification_title_id_2">Perizinan akses data dihapus</string>
+    <string name="student_notification_message_id_1">meminta untuk mengakses data perkuliahan anda.</string>
+    <string name="student_notification_message_id_2">menghapus izinnya untuk mengakses data perkuliahan anda.</string>
+    <!--End notification for student-->
+
+</resources>

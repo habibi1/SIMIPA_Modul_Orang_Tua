@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_scholarship"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="0dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="6dp">
+
+                <ImageView
+                    android:id="@+id/iv_status"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_check_circle_green_24dp"/>
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Status"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="6dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/line_vertical"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_margin="@dimen/margin_text_in_item"
+                    android:id="@+id/name_scholarship"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/size_title_toolbar"
+                    android:text="@string/beasiswa"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/padding_drawable_with_text_in_item"
+                    android:drawableStart="@drawable/ic_beasiswa_24dp"/>
+
+                <TextView
+                    android:layout_margin="@dimen/margin_text_in_item"
+                    android:id="@+id/semester_scholarship"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/semester"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/padding_drawable_with_text_in_item"
+                    android:drawableStart="@drawable/ic_semester_24dp"/>
+
+                <TextView
+                    android:layout_margin="@dimen/margin_text_in_item"
+                    android:id="@+id/tahun_scholarship"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tahun"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/padding_drawable_with_text_in_item"
+                    android:drawableStart="@drawable/ic_event_available_24"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/line_horizontal"
+        android:scaleType="fitXY"/>
+
+</LinearLayout>
