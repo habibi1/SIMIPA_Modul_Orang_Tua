@@ -75,13 +75,13 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
         holder.tingkat.setText(achievement.getTingkat());
         holder.tahun.setText(achievement.getTahunPrestasi());
 
-        if (achievement.getPrestasi().contains("Juara I")) {
+        if (achievement.getPrestasi().contains("Juara I") || achievement.getPrestasi().contains("Juara 1")) {
             holder.medal.setImageResource(R.drawable.ic_medal_gold);
             holder.dialogMedal.setImageResource(R.drawable.ic_medal_gold);
-        } else if (achievement.getPrestasi().contains("Juara II")) {
+        } else if (achievement.getPrestasi().contains("Juara II") || achievement.getPrestasi().contains("Juara 2")) {
             holder.medal.setImageResource(R.drawable.ic_medal_silver);
             holder.dialogMedal.setImageResource(R.drawable.ic_medal_silver);
-        } else if (achievement.getPrestasi().contains("Juara III")){
+        } else if (achievement.getPrestasi().contains("Juara III") || achievement.getPrestasi().contains("Juara 3")) {
             holder.medal.setImageResource(R.drawable.ic_medal_bronze);
             holder.dialogMedal.setImageResource(R.drawable.ic_medal_bronze);
         }

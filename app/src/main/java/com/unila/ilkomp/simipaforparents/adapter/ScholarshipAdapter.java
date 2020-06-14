@@ -63,11 +63,11 @@ public class ScholarshipAdapter extends RecyclerView.Adapter<ScholarshipAdapter.
         holder.semester.setText("Semester " + scholarshipRecord.getSemester());
         holder.yearScholarship.setText(scholarshipRecord.getTahunBeasiswa());
 
-        if (scholarshipRecord.getStatusAjukan().trim().equals("Berhasil")){
+        if (scholarshipRecord.getStatusAjukan().contains("Berhasil")) {
             holder.imageView_dialog_status.setImageResource(R.drawable.ic_check_circle_green_24dp);
             holder.imageView_status.setImageResource(R.drawable.ic_check_circle_green_24dp);
         } else {
-            holder.imageView_dialog_status.setImageResource(R.drawable.ic_check_circle_green_30dp);
+            holder.imageView_dialog_status.setImageResource(R.drawable.ic_cancel_red_24dp);
             holder.imageView_status.setImageResource(R.drawable.ic_cancel_red_24dp);
         }
 

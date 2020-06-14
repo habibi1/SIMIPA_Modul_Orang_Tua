@@ -4,10 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -30,8 +28,6 @@ public class ScholarshipActivity extends AppCompatActivity {
 
     ScholarshipAdapter scholarshipAdapter;
     RecyclerView recyclerView;
-    ImageView imageStudent;
-    TextView nameStudent, npmStudent;
     private ArrayList<ScholarshipRecord> list = new ArrayList<>();
     ProgressBar progressBar;
     TextView dataEmpty;
@@ -59,13 +55,6 @@ public class ScholarshipActivity extends AppCompatActivity {
 
         getData();
 
-        showRecyclerList();
-    }
-
-    private void showRecyclerList(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ScholarshipAdapter scholarshipAdapter = new ScholarshipAdapter(list);
-        recyclerView.setAdapter(scholarshipAdapter);
     }
 
     private void getData() {
@@ -95,12 +84,6 @@ public class ScholarshipActivity extends AppCompatActivity {
                         scholarshipAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(scholarshipAdapter);
 
-                        scholarshipAdapter.setOnItemClickCallback(new ScholarshipAdapter.OnItemClickCallback() {
-                            @Override
-                            public void onItemClicked(ScholarshipRecord data) {
-                                Toast.makeText(ScholarshipActivity.this, "worrrk" + data, Toast.LENGTH_SHORT).show();
-                            }
-                        });
                     } else {
                         recyclerView.setVisibility(View.GONE);
                         dataEmpty.setVisibility(View.VISIBLE);
