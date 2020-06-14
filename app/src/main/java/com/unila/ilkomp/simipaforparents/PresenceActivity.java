@@ -80,44 +80,9 @@ public class PresenceActivity extends AppCompatActivity implements PresenceKulia
         }
     }
 
-    /*
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_presence);
-
-        CardView guide, laboratory, seminar, school;
-
-        guide = findViewById(R.id.presence_guide);
-        laboratory = findViewById(R.id.presence_laboratory);
-        seminar = findViewById(R.id.presence_seminar);
-        school = findViewById(R.id.presence_school);
-
-        guide.setOnClickListener(this);
-        laboratory.setOnClickListener(this);
-        seminar.setOnClickListener(this);
-        school.setOnClickListener(this);
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.presence_guide:
-                Intent intentPresenceGuide = new Intent(this, PresenceGuideActivity.class);
-                startActivity(intentPresenceGuide);
-                break;
-            case R.id.presence_laboratory:
-                Intent intentLaboratory = new Intent(this, PresenceLaboratoryActivity.class);
-                startActivity(intentLaboratory);
-                break;
-            case R.id.presence_seminar:
-                Intent intentSeminar = new Intent(this, PresenceSeminarActivity.class);
-                startActivity(intentSeminar);
-                break;
-            case R.id.presence_school:
-                Intent intentSchool = new Intent(this, PresenceSchoolActivity.class);
-                startActivity(intentSchool);
-                break;
-        }
-    }*/
 }

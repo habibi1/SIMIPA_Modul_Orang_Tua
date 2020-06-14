@@ -70,6 +70,7 @@ public class CountSeminarAdapter extends RecyclerView.Adapter<CountSeminarAdapte
                 holder.dialogViewDetailSeminar.getWindow().setGravity(Gravity.CENTER);
                 holder.dialogViewDetailSeminar.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 //holder.scholarshipDetail.setCanceledOnTouchOutside(false);
+                holder.dialogViewDetailSeminar.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
                 holder.dialogViewDetailSeminar.show();
             }
         });

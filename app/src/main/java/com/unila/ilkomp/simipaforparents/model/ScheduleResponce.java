@@ -18,7 +18,14 @@ public class ScheduleResponce {
     private Integer totalRecords;
     @SerializedName("records")
     @Expose
-    private List<ScheduleRecord> records = null;
+    private List<ScheduleRecord> records;
+
+    public ScheduleResponce(ScheduleResponce body) {
+        this.error = body.error;
+        this.responseCode = body.responseCode;
+        this.totalRecords = body.totalRecords;
+        this.records = body.records;
+    }
 
     public Boolean getError() {
         return error;

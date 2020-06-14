@@ -238,7 +238,10 @@ public class PresenceBimbinganFragment extends Fragment {
 
                     progressBar.setVisibility(View.GONE);
                     tvDataEmpty.setVisibility(View.VISIBLE);
-                    tvDataEmpty.setText(getString(R.string.terjadi_kesalahan));
+
+                    if (isAdded())
+                        tvDataEmpty.setText(getString(R.string.terjadi_kesalahan));
+
                     viewBimbingan.setVisibility(View.GONE);
                 }
             }
@@ -247,7 +250,10 @@ public class PresenceBimbinganFragment extends Fragment {
             public void onFailure(Call<PresenceBimbinganResponce> call, Throwable t) {
                 viewBimbingan.setVisibility(View.GONE);
                 tvDataEmpty.setVisibility(View.VISIBLE);
-                tvDataEmpty.setText(getString(R.string.server_error));
+
+                if (isAdded())
+                    tvDataEmpty.setText(getString(R.string.server_error));
+
                 progressBar.setVisibility(View.GONE);
                 Log.d("c", t.getMessage());
             }
@@ -277,6 +283,7 @@ public class PresenceBimbinganFragment extends Fragment {
         dialogViewDetailBimbingan.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogViewDetailBimbingan.getWindow().setGravity(Gravity.CENTER);
         dialogViewDetailBimbingan.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialogViewDetailBimbingan.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
         dialogViewDetailBimbingan.show();
 
     }

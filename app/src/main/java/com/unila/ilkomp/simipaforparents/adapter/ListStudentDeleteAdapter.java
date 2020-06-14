@@ -110,6 +110,7 @@ public class ListStudentDeleteAdapter extends RecyclerView.Adapter<ListStudentDe
                 holder.viewDialogConfirmDelete.getWindow().setGravity(Gravity.BOTTOM);
                 holder.viewDialogConfirmDelete.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 holder.viewDialogConfirmDelete.setCanceledOnTouchOutside(false);
+                holder.viewDialogConfirmDelete.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
                 holder.viewDialogConfirmDelete.show();
             }
         });

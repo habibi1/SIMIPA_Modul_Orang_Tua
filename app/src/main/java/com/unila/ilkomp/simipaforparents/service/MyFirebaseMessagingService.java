@@ -117,7 +117,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (channelId.equals(getResources().getString(R.string.parent_notification_channel_name_4))){
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             notificationBuilder = new NotificationCompat.Builder(this, channelId)
-                    .setSmallIcon(R.drawable.ic_app_logo_unila_blue)
+                    .setSmallIcon(R.drawable.ic_notification_unila)
                     .setLargeIcon(photoProfil)
                     .setContentTitle(title)
                     .setStyle(new NotificationCompat.BigTextStyle()
@@ -130,9 +130,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         } else {
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             notificationBuilder = new NotificationCompat.Builder(this, channelId)
-                    .setSmallIcon(R.drawable.ic_app_logo_unila_blue)
-                    .setContentTitle(title)
+                    .setSmallIcon(R.drawable.ic_notification_unila)
                     .setLargeIcon(photoProfil)
+                    .setContentTitle(title)
                     .setStyle(new NotificationCompat.BigTextStyle()
                             .bigText(message))
                     .setAutoCancel(true)

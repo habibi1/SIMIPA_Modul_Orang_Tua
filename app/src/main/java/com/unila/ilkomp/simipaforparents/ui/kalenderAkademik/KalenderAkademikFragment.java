@@ -61,7 +61,7 @@ public class KalenderAkademikFragment extends Fragment implements KalenderAkadem
             if (semester.equals("Ganjil")) {
                 TabLayout.Tab tab = tabLayout.getTabAt(0);
                 tab.select();
-            } else if (semester.equals("Genap")){
+            } else if (semester.equals("Genap")) {
                 TabLayout.Tab tab = tabLayout.getTabAt(1);
                 tab.select();
             } else {
@@ -71,7 +71,9 @@ public class KalenderAkademikFragment extends Fragment implements KalenderAkadem
         }
 
         TextView TA = root.findViewById(R.id.tahunAjaran);
-        TA.setText("Kalender Akademik\nTahun Ajaran " + tahunAkademik);
+
+        if (isAdded())
+            TA.setText(getString(R.string.title_kalender_akademik) + tahunAkademik);
 
         return root;
 

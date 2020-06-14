@@ -94,6 +94,7 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
                 holder.dialogAchievementDetail.getWindow().setGravity(Gravity.CENTER);
                 holder.dialogAchievementDetail.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 //holder.scholarshipDetail.setCanceledOnTouchOutside(false);
+                holder.dialogAchievementDetail.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
                 holder.dialogAchievementDetail.show();
             }
         });

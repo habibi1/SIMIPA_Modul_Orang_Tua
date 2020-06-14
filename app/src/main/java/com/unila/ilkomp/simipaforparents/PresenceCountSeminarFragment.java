@@ -118,7 +118,8 @@ public class PresenceCountSeminarFragment extends Fragment implements View.OnCli
                     cvSeminarUsul.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_usul_unclick));
                     cvSeminarHasil.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_hasil_unclick));
 
-                    tvDaftarSeminar.setText("Daftar Semua Seminar");
+                    if (isAdded())
+                        tvDaftarSeminar.setText(getResources().getString(R.string.daftar_semua_seminar));
 
                     clickSeminarKP = false;
                     clickSeminarUsul = false;
@@ -134,13 +135,14 @@ public class PresenceCountSeminarFragment extends Fragment implements View.OnCli
                     cvSeminarUsul.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_usul_unclick));
                     cvSeminarHasil.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_hasil_unclick));
 
-                    tvDaftarSeminar.setText("Daftar Seminar KP");
+                    if (isAdded())
+                        tvDaftarSeminar.setText(getResources().getString(R.string.daftar_seminar_kp));
 
                     clickSeminarKP = true;
                     clickSeminarUsul = false;
                     clickSeminarHasil = false;
 
-                    if (seminarKP == null){
+                    if (seminarKP == null) {
                         recyclerView.setVisibility(View.GONE);
                         tv_empty_data.setVisibility(View.VISIBLE);
                     } else {
@@ -153,13 +155,14 @@ public class PresenceCountSeminarFragment extends Fragment implements View.OnCli
                 }
                 break;
             case R.id.cv_seminar_usul:
-                if (clickSeminarUsul){
+                if (clickSeminarUsul) {
 
                     cvSeminarKp.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_kp_unclick));
                     cvSeminarUsul.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_usul_unclick));
                     cvSeminarHasil.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_hasil_unclick));
 
-                    tvDaftarSeminar.setText("Daftar Semua Seminar");
+                    if (isAdded())
+                        tvDaftarSeminar.setText(getResources().getString(R.string.daftar_semua_seminar));
 
                     clickSeminarKP = false;
                     clickSeminarUsul = false;
@@ -175,13 +178,14 @@ public class PresenceCountSeminarFragment extends Fragment implements View.OnCli
                     cvSeminarUsul.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_usul_click));
                     cvSeminarHasil.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_hasil_unclick));
 
-                    tvDaftarSeminar.setText("Daftar Seminar Usul");
+                    if (isAdded())
+                        tvDaftarSeminar.setText(getResources().getString(R.string.daftar_seminar_usul));
 
                     clickSeminarKP = false;
                     clickSeminarUsul = true;
                     clickSeminarHasil = false;
 
-                    if (seminarUsul == null){
+                    if (seminarUsul == null) {
                         recyclerView.setVisibility(View.GONE);
                         tv_empty_data.setVisibility(View.VISIBLE);
                     } else {
@@ -193,13 +197,14 @@ public class PresenceCountSeminarFragment extends Fragment implements View.OnCli
                 }
                 break;
             case R.id.cv_seminar_hasil:
-                if (clickSeminarHasil){
+                if (clickSeminarHasil) {
 
                     cvSeminarKp.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_kp_unclick));
                     cvSeminarUsul.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_usul_unclick));
                     cvSeminarHasil.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_hasil_unclick));
 
-                    tvDaftarSeminar.setText("Daftar Semua Seminar");
+                    if (isAdded())
+                        tvDaftarSeminar.setText(getResources().getString(R.string.daftar_semua_seminar));
 
                     clickSeminarKP = false;
                     clickSeminarUsul = false;
@@ -215,13 +220,14 @@ public class PresenceCountSeminarFragment extends Fragment implements View.OnCli
                     cvSeminarUsul.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_usul_unclick));
                     cvSeminarHasil.setCardBackgroundColor(getResources().getColor(R.color.color_seminar_hasil_click));
 
-                    tvDaftarSeminar.setText("Daftar Seminar Hasil");
+                    if (isAdded())
+                        tvDaftarSeminar.setText(getResources().getString(R.string.daftar_seminar_hasil));
 
                     clickSeminarKP = true;
                     clickSeminarUsul = false;
                     clickSeminarHasil = true;
 
-                    if (seminarHasil == null){
+                    if (seminarHasil == null) {
                         recyclerView.setVisibility(View.GONE);
                         tv_empty_data.setVisibility(View.VISIBLE);
                     } else {
@@ -289,13 +295,16 @@ public class PresenceCountSeminarFragment extends Fragment implements View.OnCli
                 if (response.isSuccessful()) {
 
                     assert response.body() != null;
-                    if (response.body().getTotalRecords() > 0){
-                        tvDaftarSeminar.setText(getString(R.string.daftar_semua_seminar));
-                        tvJumlahSeminarKP.setText(String.format("%d", response.body().getJumlahSeminarKP()));
-                        tvJumlahSeminarUsul.setText(String.format("%d", response.body().getJumlahSeminarUsul()));
-                        tvJumlahSeminarHasil.setText(String.format("%d", response.body().getJumlahSeminarHasil()));
+                    if (response.body().getTotalRecords() > 0) {
 
-                        for (CountSeminarRecord seminarRecord : response.body().getSeminarRecords()){
+                        if (isAdded()) {
+                            tvDaftarSeminar.setText(getString(R.string.daftar_semua_seminar));
+                            tvJumlahSeminarKP.setText(String.format("%d", response.body().getJumlahSeminarKP()));
+                            tvJumlahSeminarUsul.setText(String.format("%d", response.body().getJumlahSeminarUsul()));
+                            tvJumlahSeminarHasil.setText(String.format("%d", response.body().getJumlahSeminarHasil()));
+                        }
+
+                        for (CountSeminarRecord seminarRecord : response.body().getSeminarRecords()) {
 
                             seminarAll.add(seminarRecord);
 
@@ -316,17 +325,22 @@ public class PresenceCountSeminarFragment extends Fragment implements View.OnCli
 
                     } else {
 
-                        tvDaftarSeminar.setText(getString(R.string.daftar_semua_seminar));
-                        tvJumlahSeminarKP.setText(getString(R.string.nol));
-                        tvJumlahSeminarUsul.setText(getString(R.string.nol));
-                        tvJumlahSeminarHasil.setText(getString(R.string.nol));
+                        if (isAdded()) {
+                            tvDaftarSeminar.setText(getString(R.string.daftar_semua_seminar));
+                            tvJumlahSeminarKP.setText(getString(R.string.nol));
+                            tvJumlahSeminarUsul.setText(getString(R.string.nol));
+                            tvJumlahSeminarHasil.setText(getString(R.string.nol));
+                        }
 
                         clickConfirm = false;
                         setClick(clickConfirm);
 
                         recyclerView.setVisibility(View.GONE);
                         tv_empty_data.setVisibility(View.VISIBLE);
-                        tv_empty_data.setText(getString(R.string.data_kosong));
+
+                        if (isAdded())
+                            tv_empty_data.setText(getString(R.string.data_kosong));
+
                         progressBar.setVisibility(View.GONE);
 
                     }
@@ -337,7 +351,10 @@ public class PresenceCountSeminarFragment extends Fragment implements View.OnCli
                     viewCountSeminar.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);
                     tv_empty_data.setVisibility(View.VISIBLE);
-                    tv_empty_data.setText(getString(R.string.terjadi_kesalahan));
+
+                    if (isAdded())
+                        tv_empty_data.setText(getString(R.string.terjadi_kesalahan));
+
                     progressBar.setVisibility(View.GONE);
                 }
             }
@@ -348,7 +365,10 @@ public class PresenceCountSeminarFragment extends Fragment implements View.OnCli
                 viewCountSeminar.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 tv_empty_data.setVisibility(View.VISIBLE);
-                tv_empty_data.setText(getString(R.string.server_error));
+
+                if (isAdded())
+                    tv_empty_data.setText(getString(R.string.server_error));
+
                 progressBar.setVisibility(View.GONE);
                 Log.d("c", t.getMessage());
             }

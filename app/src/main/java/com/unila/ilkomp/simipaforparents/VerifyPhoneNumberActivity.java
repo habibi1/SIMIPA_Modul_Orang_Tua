@@ -593,6 +593,7 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
         verificationCode.getWindow().setGravity(Gravity.BOTTOM);
         verificationCode.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         verificationCode.setCanceledOnTouchOutside(false);
+        verificationCode.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
         verificationCode.show();
     }
 

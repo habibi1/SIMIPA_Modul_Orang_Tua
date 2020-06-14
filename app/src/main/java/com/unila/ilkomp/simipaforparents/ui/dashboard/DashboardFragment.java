@@ -178,13 +178,19 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                     } else {
                         viewProfileStudent.setVisibility(View.GONE);
                         dialogDataEmpty.setVisibility(View.VISIBLE);
-                        dialogDataEmpty.setText(getString(R.string.data_kosong));
+
+                        if (isAdded())
+                            dialogDataEmpty.setText(getString(R.string.data_kosong));
+
                         dialogProgresBar.setVisibility(View.GONE);
                     }
                 } else {
                     viewProfileStudent.setVisibility(View.GONE);
                     dialogDataEmpty.setVisibility(View.VISIBLE);
-                    dialogDataEmpty.setText(getString(R.string.terjadi_kesalahan));
+
+                    if (isAdded())
+                        dialogDataEmpty.setText(getString(R.string.terjadi_kesalahan));
+
                     dialogProgresBar.setVisibility(View.GONE);
                 }
             }
@@ -193,7 +199,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             public void onFailure(Call<ProfileStudentResponce> call, Throwable t) {
                 viewProfileStudent.setVisibility(View.GONE);
                 dialogDataEmpty.setVisibility(View.VISIBLE);
-                dialogDataEmpty.setText(getString(R.string.server_error));
+
+                if (isAdded())
+                    dialogDataEmpty.setText(getString(R.string.server_error));
+
                 dialogProgresBar.setVisibility(View.GONE);
             }
         });
@@ -210,6 +219,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 viewDialogProfileStudent.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 viewDialogProfileStudent.getWindow().setGravity(Gravity.CENTER);
                 viewDialogProfileStudent.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                viewDialogProfileStudent.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
                 viewDialogProfileStudent.show();
                 break;
             case R.id.txtclose:

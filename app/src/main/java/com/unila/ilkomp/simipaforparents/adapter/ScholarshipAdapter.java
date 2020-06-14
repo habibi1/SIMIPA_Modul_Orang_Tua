@@ -92,6 +92,7 @@ public class ScholarshipAdapter extends RecyclerView.Adapter<ScholarshipAdapter.
                 holder.scholarshipDetail.getWindow().setGravity(Gravity.CENTER);
                 holder.scholarshipDetail.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 //holder.scholarshipDetail.setCanceledOnTouchOutside(false);
+                holder.scholarshipDetail.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
                 holder.scholarshipDetail.show();
             }
         });

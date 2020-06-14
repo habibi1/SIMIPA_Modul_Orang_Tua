@@ -101,21 +101,28 @@ public class KalenderAkademikGenapFragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
 
                 if (response.isSuccessful()) {
-                    kalenderAkademikAdapter = new KalenderAkademikAdapter(getActivity().getApplicationContext());
-                    kalenderAkademikAdapter.setListKalenderAkademik(response.body().getKalenderAkademikRecords());
-                    kalenderAkademikAdapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(kalenderAkademikAdapter);
 
-/*                    kalenderAkademikAdapter.setOnItemClickCallback(new ListStudentAdapter.OnItemClickCallback() {
-                        @Override
-                        public void onItemClicked(StudentRecord data) {
-                            showSelected(data);
-                        }
-                    });
-*/
+                    if (response.body().getTotalRecords() > 0) {
+                        kalenderAkademikAdapter = new KalenderAkademikAdapter(getActivity().getApplicationContext());
+                        kalenderAkademikAdapter.setListKalenderAkademik(response.body().getKalenderAkademikRecords());
+                        kalenderAkademikAdapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(kalenderAkademikAdapter);
+                    } else {
+                        recyclerView.setVisibility(View.GONE);
+                        dataEmpty.setVisibility(View.VISIBLE);
+
+                        if (isAdded())
+                            dataEmpty.setText(getString(R.string.data_kosong));
+
+                        progressBar.setVisibility(View.GONE);
+                    }
                 } else {
                     recyclerView.setVisibility(View.GONE);
                     dataEmpty.setVisibility(View.VISIBLE);
+
+                    if (isAdded())
+                        dataEmpty.setText(getString(R.string.terjadi_kesalahan));
+
                     progressBar.setVisibility(View.GONE);
                 }
             }
@@ -124,7 +131,10 @@ public class KalenderAkademikGenapFragment extends Fragment {
             public void onFailure(Call<KalenderAkademikResponce> call, Throwable t) {
                 recyclerView.setVisibility(View.GONE);
                 dataEmpty.setVisibility(View.VISIBLE);
-                dataEmpty.setText("Error");
+
+                if (isAdded())
+                    dataEmpty.setText(getString(R.string.server_error));
+
                 progressBar.setVisibility(View.GONE);
                 Log.d("c", t.getMessage());
             }

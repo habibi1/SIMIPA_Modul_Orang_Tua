@@ -82,64 +82,9 @@ public class ScheduleActivity extends AppCompatActivity implements MondaySchedul
         }
     }
 
-/*    Toolbar toolbar;
-    RecyclerView recyclerView;
-    private ArrayList<ScheduleRecord> list = new ArrayList<>();
-    ScheduleAdapter scheduleAdapter;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule);
-
-        recyclerView = findViewById(R.id.rv_schedule);
-        recyclerView.setHasFixedSize(true);
-
-        getData();
-
-        showRecyclerList();
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
-
-    private void showRecyclerList(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ScheduleAdapter scheduleAdapter = new ScheduleAdapter(list);
-        recyclerView.setAdapter(scheduleAdapter);
-
-    }
-
-    private void getData() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-
-        ApiService apiInterface = Client.getClient().create(ApiService.class);
-
-        Call<ScheduleResponce> call = apiInterface.listSchedule("selasa", SharedPrefManager.getNPMChoosed(this), TimeUtil.getTahunAkademik(), TimeUtil.getSemester());
-        call.enqueue(new Callback<ScheduleResponce>() {
-
-            @Override
-            public void onResponse(Call<ScheduleResponce> call, retrofit2.Response<ScheduleResponce> response) {
-                progressDialog.dismiss();
-                if (response.body() != null) {
-                    scheduleAdapter = new ScheduleAdapter(getApplicationContext());
-                    scheduleAdapter.setSchedule(response.body().getSchedule());
-                    scheduleAdapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(scheduleAdapter);
-
-                    scheduleAdapter.setOnItemClickCallback(new ScheduleAdapter.OnItemClickCallback() {
-                        @Override
-                        public void onItemClicked(ScheduleRecord data) {
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ScheduleResponce> call, Throwable t) {
-                progressDialog.dismiss();
-                Log.d("c", t.getMessage());
-            }
-        });
-    }*/
 }

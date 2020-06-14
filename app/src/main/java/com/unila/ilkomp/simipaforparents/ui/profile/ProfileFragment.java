@@ -102,13 +102,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     } else {
                         recyclerView.setVisibility(View.GONE);
                         dataEmpty.setVisibility(View.VISIBLE);
-                        dataEmpty.setText(getResources().getString(R.string.data_kosong));
+
+                        if (isAdded())
+                            dataEmpty.setText(getResources().getString(R.string.data_kosong));
+
                         progressBar.setVisibility(View.GONE);
                     }
                 } else {
                     recyclerView.setVisibility(View.GONE);
                     dataEmpty.setVisibility(View.VISIBLE);
-                    dataEmpty.setText(getResources().getString(R.string.terjadi_kesalahan));
+
+                    if (isAdded())
+                        dataEmpty.setText(getResources().getString(R.string.terjadi_kesalahan));
+
                     progressBar.setVisibility(View.GONE);
                 }
             }
@@ -117,7 +123,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             public void onFailure(Call<StudentsResponce> call, Throwable t) {
                 recyclerView.setVisibility(View.GONE);
                 dataEmpty.setVisibility(View.VISIBLE);
-                dataEmpty.setText(getResources().getString(R.string.server_error));
+
+                if (isAdded())
+                    dataEmpty.setText(getResources().getString(R.string.server_error));
+
                 progressBar.setVisibility(View.GONE);
                 Log.d("c", t.getMessage());
             }

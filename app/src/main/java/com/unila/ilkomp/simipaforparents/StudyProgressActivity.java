@@ -303,35 +303,12 @@ public class StudyProgressActivity extends AppCompatActivity implements OnChartG
         }
     }
 
-    @SuppressLint("ViewConstructor")
-    public static class MyMarkerView extends MarkerView {
-        private TextView tvContent;
-        public MyMarkerView(Context context, int layoutResource) {
-            super(context, layoutResource);
-            // find your layout components
-            tvContent = (TextView) findViewById(R.id.tvContent);
-        }
-        // callbacks everytime the MarkerView is redrawn, can be used to update the
-        // content (user-interface)
-        @SuppressLint("SetTextI18n")
-        @Override
-        public void refreshContent(Entry e, Highlight highlight) {
-            tvContent.setText("" + e.getY());
-            // this will perform necessary layouting
-            super.refreshContent(e, highlight);
-        }
-        private MPPointF mOffset;
-        @Override
-        public MPPointF getOffset() {
-            if(mOffset == null) {
-                // center the marker horizontally and vertically
-                mOffset = new MPPointF(-(getWidth() / 2), -getHeight());
-            }
-            return mOffset;
-        }
+    @Override
+    public void onNothingSelected() {
+
     }
 
-    private ArrayList<Entry> dataTotalSKS(){
+    private ArrayList<Entry> dataTotalSKS() {
         ArrayList<Entry> dataVals = new ArrayList<Entry>();
         dataVals.add(new Entry(0f, 0f));
         dataVals.add(new Entry(1f, 36f));
@@ -440,7 +417,39 @@ public class StudyProgressActivity extends AppCompatActivity implements OnChartG
     }
 
     @Override
-    public void onNothingSelected() {
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
+    @SuppressLint("ViewConstructor")
+    public static class MyMarkerView extends MarkerView {
+        private TextView tvContent;
+        private MPPointF mOffset;
+
+        public MyMarkerView(Context context, int layoutResource) {
+            super(context, layoutResource);
+            // find your layout components
+            tvContent = findViewById(R.id.tvContent);
+        }
+
+        // callbacks everytime the MarkerView is redrawn, can be used to update the
+        // content (user-interface)
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void refreshContent(Entry e, Highlight highlight) {
+            tvContent.setText("" + e.getY());
+            // this will perform necessary layouting
+            super.refreshContent(e, highlight);
+        }
+
+        @Override
+        public MPPointF getOffset() {
+            if (mOffset == null) {
+                // center the marker horizontally and vertically
+                mOffset = new MPPointF(-(getWidth() / 2), -getHeight());
+            }
+            return mOffset;
+        }
     }
 }

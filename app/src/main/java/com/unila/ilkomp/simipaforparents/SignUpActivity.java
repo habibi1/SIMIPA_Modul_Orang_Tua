@@ -271,6 +271,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         select_method.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         select_method.getWindow().setGravity(Gravity.BOTTOM);
         select_method.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        select_method.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
         select_method.show();
     }
 

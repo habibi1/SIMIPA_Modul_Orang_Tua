@@ -1,6 +1,5 @@
 package com.unila.ilkomp.simipaforparents;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,7 +70,7 @@ public class ThursdayScheduleFragment extends Fragment {
         }
     }
 
-    @Override
+/*    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
@@ -86,7 +85,7 @@ public class ThursdayScheduleFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
+    }*/
 
     /**
      * This interface must be implemented by activities that contain this
@@ -113,6 +112,7 @@ public class ThursdayScheduleFragment extends Fragment {
         ApiService apiInterface = Client.getClient().create(ApiService.class);
 
         Call<ScheduleResponce> call = apiInterface.listSchedule("kamis", SharedPrefManager.getNPMChoosed(getContext()), TimeUtil.getTahunAkademik(), TimeUtil.getSemester());
+
         call.enqueue(new Callback<ScheduleResponce>() {
 
             @Override
@@ -132,10 +132,16 @@ public class ThursdayScheduleFragment extends Fragment {
                         scheduleAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(scheduleAdapter);
                     } else {
+
+                        ScheduleResponce msg = new ScheduleResponce(response.body());
+
                         helpColor.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.GONE);
                         dataEmpty.setVisibility(View.VISIBLE);
-                        dataEmpty.setText(getString(R.string.data_kosong));
+
+                        if (isAdded())
+                            dataEmpty.setText(getString(R.string.data_kosong));
+
                         progressBar.setVisibility(View.GONE);
                     }
 
@@ -143,7 +149,10 @@ public class ThursdayScheduleFragment extends Fragment {
                     helpColor.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);
                     dataEmpty.setVisibility(View.VISIBLE);
-                    dataEmpty.setText(getString(R.string.terjadi_kesalahan));
+
+                    if (isAdded())
+                        dataEmpty.setText(getString(R.string.terjadi_kesalahan));
+
                     progressBar.setVisibility(View.GONE);
                 }
             }
@@ -153,7 +162,10 @@ public class ThursdayScheduleFragment extends Fragment {
                 helpColor.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 dataEmpty.setVisibility(View.VISIBLE);
-                dataEmpty.setText(getString(R.string.server_error));
+
+                if (isAdded())
+                    dataEmpty.setText(getString(R.string.server_error));
+
                 progressBar.setVisibility(View.GONE);
                 Log.d("c", t.getMessage());
             }
