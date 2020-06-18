@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -159,7 +160,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-                imei = "not found in Q";
+                imei = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 imei = telephonyManager.getImei();
             } else {
@@ -221,7 +222,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         // Get new Instance ID token
                                         String token = task.getResult().getToken();
 
-                                        UpdateToken(teks_telepon, token, loginRecord);
+                                        UpdateToken(teks_telepon, teks_imei, token, loginRecord);
 
                                         // Log and toast
 //                                        String msg = getString(R.string.msg_token_fmt, token);
@@ -256,17 +257,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    public void UpdateToken(String telepon, String token, List<LoginRecord> loginRecord){
+    public void UpdateToken(String telepon, String imei, String token, List<LoginRecord> loginRecord) {
         ApiService apiService = Client.getClient().create(ApiService.class);
 
-        Call<UpdateTokenResponce> updateToken = apiService.updateToken(telepon, token);
+        Call<UpdateTokenResponce> updateToken = apiService.updateToken(telepon, imei, token);
         updateToken.enqueue(new Callback<UpdateTokenResponce>() {
             @Override
             public void onResponse(Call<UpdateTokenResponce> call, retrofit2.Response<UpdateTokenResponce> response) {
 
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     assert response.body() != null;
-                    if (response.body().getResponseCode() == 200){
+                    if (response.body().getResponseCode() == 200) {
 
                         if (response.body().getTotalRecords() > 0){
                             Log.d("Update Token", "Success Refreshed token to Server: " + token);

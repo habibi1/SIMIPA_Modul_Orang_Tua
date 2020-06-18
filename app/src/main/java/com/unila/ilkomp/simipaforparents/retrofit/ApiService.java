@@ -67,6 +67,7 @@ public interface ApiService {
     @POST("update-token.php")
     Call<UpdateTokenResponce> updateToken(
             @Field("user") String user,
+            @Field("imei") String imei,
             @Field("token") String token
     );
 
