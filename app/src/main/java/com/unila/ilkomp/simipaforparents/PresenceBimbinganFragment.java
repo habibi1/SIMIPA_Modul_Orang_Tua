@@ -171,7 +171,7 @@ public class PresenceBimbinganFragment extends Fragment {
 
         ApiService apiInterface = Client.getClient().create(ApiService.class);
 
-        Call<PresenceBimbinganResponce> call = apiInterface.rekapitulasiBimbinganSkripsi(SharedPrefManager.getNPMChoosed(getContext()));
+        Call<PresenceBimbinganResponce> call = apiInterface.rekapitulasiBimbingan(SharedPrefManager.getNPMChoosed(getContext()));
         call.enqueue(new Callback<PresenceBimbinganResponce>() {
 
             @Override

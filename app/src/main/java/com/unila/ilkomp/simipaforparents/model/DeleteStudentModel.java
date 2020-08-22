@@ -8,10 +8,13 @@ public class DeleteStudentModel {
     private String npm;
     @SerializedName("no_hp")
     private String no_hp;
+    @SerializedName("jwt")
+    private String jwt;
 
-    public DeleteStudentModel(String npm, String no_hp) {
+    public DeleteStudentModel(String npm, String no_hp, String jwt) {
         this.npm = npm;
         this.no_hp = no_hp;
+        this.jwt = jwt;
     }
 
     public String getNpm() {
@@ -28,5 +31,13 @@ public class DeleteStudentModel {
 
     public void setNo_hp(String no_hp) {
         this.no_hp = no_hp;
+    }
+
+    public String getJwt() {
+        return jwt;
+    }
+
+    public void setJwt(String jwt) {
+        this.jwt = jwt;
     }
 }

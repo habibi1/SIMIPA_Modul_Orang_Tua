@@ -54,6 +54,15 @@ public class ScheduleRecord {
     @Expose
     private String selesai;
 
+    public ScheduleRecord(String mataKuliah, String ruang, String dosenPJ, String mulai, String selesai, String jenis) {
+        this.mataKuliah = mataKuliah;
+        this.ruang = ruang;
+        this.dosenPJ = dosenPJ;
+        this.mulai = mulai;
+        this.selesai = selesai;
+        this.jenis = jenis;
+    }
+
     public String getId() {
         return id;
     }

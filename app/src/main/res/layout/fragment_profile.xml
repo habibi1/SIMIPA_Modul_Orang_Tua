@@ -68,6 +68,7 @@
                             android:id="@+id/circleImageProfileParent"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
+                            android:padding="3dp"
                             android:background="@drawable/logo_gradient_background"
                             android:src="@drawable/ic_person_white"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -77,6 +78,7 @@
                             android:contentDescription="@string/desc_foto_profil_orang_tua" />
 
                         <ImageView
+                            android:visibility="gone"
                             android:id="@+id/change_picture"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
@@ -131,13 +133,13 @@
                         android:paddingTop="5dp"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:text="@string/hapus_mahasiswa"/>
+                        android:text="@string/kelola_mahasiswa" />
 
                     <TextView
                         android:id="@+id/data_empty"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        android:text="Data Kosong"
+                        android:text="@string/data_kosong"
                         android:gravity="center"
                         android:visibility="gone"/>
 
@@ -153,39 +155,40 @@
                         android:id="@+id/rv_delete_student"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        tools:itemCount="4"
                         tools:listitem="@layout/item_row_student_delete"/>
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
+            <!--            <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            app:cardElevation="0dp"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <TextView
+                                android:id="@+id/help"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/bantuan"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/cardView"
+                                tools:ignore="MissingConstraints" />
+
+                        </androidx.cardview.widget.CardView>-->
+
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                app:cardElevation="0dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
-
-                <TextView
-                    android:id="@+id/help"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bantuan"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView"
-                    tools:ignore="MissingConstraints" />
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_logout"
+                android:id="@+id/cv_logout_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="0dp"

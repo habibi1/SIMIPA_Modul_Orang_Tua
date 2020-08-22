@@ -18,7 +18,6 @@ public class StudentsResponce {
     private Integer totalRecords;
     @SerializedName("records")
     @Expose
-
     private List<StudentRecord> studentRecords = null;
 
     public Boolean getError() {

@@ -97,7 +97,7 @@ public class StudyProgressActivity extends AppCompatActivity implements OnChartG
 
         LineData data = new LineData(set);
 
-        lineChartSKS.setNoDataText("Data Kosong");
+        lineChartSKS.setNoDataText(getString(R.string.data_kosong));
         lineChartSKS.setDrawGridBackground(true); // tampilkan grid
         //lineChart.setDrawBorders(true); //garis pinggir
 
@@ -127,7 +127,7 @@ public class StudyProgressActivity extends AppCompatActivity implements OnChartG
 
         lineChartSKS.animateY(2000, Easing.EaseInOutQuart);
 
-        MyMarkerView mv = new MyMarkerView(this, R.layout.chart_market_custom);
+        MyMarkerView mv = new MyMarkerView(this, R.layout.chart_marker_custom);
         lineChartSKS.setMarker(mv);
 
         lineChartSKS.setData(data);
@@ -195,7 +195,7 @@ public class StudyProgressActivity extends AppCompatActivity implements OnChartG
 
         lineChartIPK.animateY(2000, Easing.EaseInOutQuart);
 
-        MyMarkerView mv = new MyMarkerView(this, R.layout.chart_market_custom);
+        MyMarkerView mv = new MyMarkerView(this, R.layout.chart_marker_custom);
         lineChartIPK.setMarker(mv);
 
         lineChartIPK.setData(data);

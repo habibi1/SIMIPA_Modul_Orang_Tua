@@ -26,17 +26,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/intro_logo_circle" />
+        app:srcCompat="@drawable/ic_circle_fmipa" />
 
     <ImageView
         android:id="@+id/image_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="154dp"
+        android:layout_height="181dp"
         app:layout_constraintBottom_toBottomOf="@+id/image_circle"
         app:layout_constraintEnd_toEndOf="@+id/image_circle"
         app:layout_constraintStart_toStartOf="@+id/image_circle"
         app:layout_constraintTop_toTopOf="@+id/image_circle"
-        app:srcCompat="@drawable/intro_logo" />
+        app:srcCompat="@drawable/intro_logo_app" />
 
     <ImageView
         android:id="@+id/image_splashscreen"

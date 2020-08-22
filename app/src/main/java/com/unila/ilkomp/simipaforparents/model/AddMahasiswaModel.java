@@ -8,10 +8,13 @@ public class AddMahasiswaModel {
     private String npm;
     @SerializedName("no_hp")
     private String no_hp;
+    @SerializedName("jwt")
+    private String jwt;
 
-    public AddMahasiswaModel(String npm, String no_hp){
+    public AddMahasiswaModel(String npm, String no_hp, String jwt) {
         this.npm = npm;
         this.no_hp = no_hp;
+        this.jwt = jwt;
     }
 
     public String getNpm() {
@@ -30,4 +33,11 @@ public class AddMahasiswaModel {
         this.no_hp = no_hp;
     }
 
+    public String getJwt() {
+        return jwt;
+    }
+
+    public void setJwt(String jwt) {
+        this.jwt = jwt;
+    }
 }

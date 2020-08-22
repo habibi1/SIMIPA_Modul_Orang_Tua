@@ -33,6 +33,18 @@ public class ScholarshipRecord {
     @Expose
     private String keterangan;
 
+    public ScholarshipRecord(String id, String npm, String semester, String tahunBeasiswa, String jenisBeasiswa, String namaBeasiswa, String noUsulan, String statusAjukan, String keterangan) {
+        this.id = id;
+        this.npm = npm;
+        this.semester = semester;
+        this.tahunBeasiswa = tahunBeasiswa;
+        this.jenisBeasiswa = jenisBeasiswa;
+        this.namaBeasiswa = namaBeasiswa;
+        this.noUsulan = noUsulan;
+        this.statusAjukan = statusAjukan;
+        this.keterangan = keterangan;
+    }
+
     public String getId() {
         return id;
     }

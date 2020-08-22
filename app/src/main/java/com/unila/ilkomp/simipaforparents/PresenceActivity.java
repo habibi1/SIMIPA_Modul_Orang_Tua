@@ -41,8 +41,8 @@ public class PresenceActivity extends AppCompatActivity implements PresenceKulia
 
     private void setupViewPager(ViewPager viewPager) {
         PresenceActivity.ViewPagerAdapter adapter = new PresenceActivity.ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new PresenceCountSeminarFragment(), "Seminar");
-        adapter.addFrag(new PresenceBimbinganFragment(), "Bimbingan");
+        adapter.addFrag(new PresenceCountSeminarFragment(), getString(R.string.seminar));
+        adapter.addFrag(new PresenceBimbinganFragment(), getString(R.string.bimbingan));
         viewPager.setAdapter(adapter);
     }
 

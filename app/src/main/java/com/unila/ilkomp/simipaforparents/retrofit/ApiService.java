@@ -9,6 +9,8 @@ import com.unila.ilkomp.simipaforparents.model.DeleteStudentModel;
 import com.unila.ilkomp.simipaforparents.model.DeleteStudentResponce;
 import com.unila.ilkomp.simipaforparents.model.KalenderAkademikResponce;
 import com.unila.ilkomp.simipaforparents.model.LoginResponce;
+import com.unila.ilkomp.simipaforparents.model.LogoutModel;
+import com.unila.ilkomp.simipaforparents.model.LogoutResponce;
 import com.unila.ilkomp.simipaforparents.model.NotificationResponce;
 import com.unila.ilkomp.simipaforparents.model.NotificationSender;
 import com.unila.ilkomp.simipaforparents.model.PresenceBimbinganResponce;
@@ -16,7 +18,9 @@ import com.unila.ilkomp.simipaforparents.model.PresenceSeminarResponce;
 import com.unila.ilkomp.simipaforparents.model.ProfileStudentResponce;
 import com.unila.ilkomp.simipaforparents.model.ScheduleResponce;
 import com.unila.ilkomp.simipaforparents.model.ScholarshipResponce;
+import com.unila.ilkomp.simipaforparents.model.SignUpResponce;
 import com.unila.ilkomp.simipaforparents.model.SplashscreenResponce;
+import com.unila.ilkomp.simipaforparents.model.StatusSemesterRecord;
 import com.unila.ilkomp.simipaforparents.model.StudentsResponce;
 import com.unila.ilkomp.simipaforparents.model.UpdateTokenResponce;
 import com.unila.ilkomp.simipaforparents.model.UploadImageResponce;
@@ -24,7 +28,6 @@ import com.unila.ilkomp.simipaforparents.model.VerifyPhoneNumberRecord;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -39,12 +42,13 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     @FormUrlEncoded
-    @POST("login-parents.php")
+    @POST("login-parents-new.php")
     Call<LoginResponce> login(
-            @Field("nohp") String nohp,
+            @Field("user") String user,
             @Field("pass") String pass,
             @Field("imei") String imei,
-            @Field("ip") String ip
+            @Field("ip") String ip,
+            @Field("token") String token
     );
 
     @FormUrlEncoded
@@ -56,7 +60,12 @@ public interface ApiService {
     @POST("parent-delete-student.php")
     Call<DeleteStudentResponce> deleteStudent(
             @Body DeleteStudentModel deleteStudentModel
-            );
+    );
+
+    @POST("logout.php")
+    Call<LogoutResponce> logout(
+            @Body LogoutModel logoutModel
+    );
 
     @POST("parent-create-student.php")
     Call<AddMahasiswaResponce> createStudent(
@@ -71,11 +80,15 @@ public interface ApiService {
             @Field("token") String token
     );
 
-    @FormUrlEncoded
+    @Multipart
     @POST("register-parent.php")
-    Call<ResponseBody> register(
-            @Field("npm") String npm,
-            @Field("id_parent") String idParent
+    Call<SignUpResponce> register(
+            @Part MultipartBody.Part foto,
+            @Part("no_hp") RequestBody no_hp,
+            @Part("nama") RequestBody nama,
+            @Part("password") RequestBody password,
+            @Part("npm") RequestBody npm,
+            @Part("nama_foto") RequestBody nama_foto
     );
 
     @Multipart
@@ -118,6 +131,11 @@ public interface ApiService {
             @Query("npm") String npm
     );
 
+    @GET("soon.php")
+    Call<StatusSemesterRecord> listStatusSemester(
+            @Query("npm") String npm
+    );
+
     @GET("read-rekapitulasi-seminar-mhs.php")
     Call<PresenceSeminarResponce> listPresenceSeminar(
             @Query("npm") String npm
@@ -129,7 +147,7 @@ public interface ApiService {
     );
 
     @GET("read-rekapitulasi-skripsi.php")
-    Call<PresenceBimbinganResponce> rekapitulasiBimbinganSkripsi(
+    Call<PresenceBimbinganResponce> rekapitulasiBimbingan(
             @Query("npm") String npm
     );
 

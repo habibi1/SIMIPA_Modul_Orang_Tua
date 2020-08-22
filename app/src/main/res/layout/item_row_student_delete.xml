@@ -26,8 +26,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_item_name"
                 android:layout_width="match_parent"
@@ -35,7 +36,9 @@
                 android:layout_marginBottom="8dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Name" />
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="Nama" />
             <TextView
                 android:id="@+id/tv_item_npm"
                 android:layout_width="match_parent"
@@ -49,14 +52,26 @@
             android:id="@+id/confirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_gravity="center"
             android:lines="2"
+            android:text="Menunggu \nKonfirmasi"
             android:textColor="@color/colorRed"
-            android:textStyle="bold"
             android:textSize="10sp"
-            android:text="Menunggu \nKonfirmasi"/>
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_cancel_request"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:padding="9dp"
+            android:src="@drawable/ic_clear" />
 
         <ImageView
             android:id="@+id/delete"

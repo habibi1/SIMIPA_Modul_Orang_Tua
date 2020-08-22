@@ -37,7 +37,7 @@
                 android:layout_marginBottom="8dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Name" />
+                tools:text="@string/nama" />
             <TextView
                 android:id="@+id/tv_item_npm"
                 android:layout_width="match_parent"

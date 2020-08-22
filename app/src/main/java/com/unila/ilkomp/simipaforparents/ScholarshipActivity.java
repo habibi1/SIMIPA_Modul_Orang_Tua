@@ -19,6 +19,7 @@ import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -53,7 +54,19 @@ public class ScholarshipActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        getData();
+        progressBar.setVisibility(View.GONE);
+        ScholarshipRecord scheduleRecord1 = new ScholarshipRecord("1", "1617051103", "1", "2017", "BRI", "BRILian", "001", "Ditolak", "Bantuan biaya pendidikan");
+        ScholarshipRecord scheduleRecord2 = new ScholarshipRecord("2", "1617051103", "3", "2018", "Ristekdikti", "Bidikmisi", "001", "Diterima", "Bantuan biaya pendidikan");
+        List<ScholarshipRecord> coba = new ArrayList<>();
+        coba.add(scheduleRecord1);
+        coba.add(scheduleRecord2);
+
+        scholarshipAdapter = new ScholarshipAdapter(context);
+        scholarshipAdapter.setListScholarship(coba);
+        scholarshipAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(scholarshipAdapter);
+
+        //getData();
 
     }
 

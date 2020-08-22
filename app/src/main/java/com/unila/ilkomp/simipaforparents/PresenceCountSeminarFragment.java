@@ -308,11 +308,11 @@ public class PresenceCountSeminarFragment extends Fragment implements View.OnCli
 
                             seminarAll.add(seminarRecord);
 
-                            if (seminarRecord.getJenis().toLowerCase().contains("seminar kerja"))
+                            if (seminarRecord.getJenis().toLowerCase().contains(getContext().getString(R.string.seminar_kerja_lower)))
                                 seminarKP.add(seminarRecord);
-                            else if (seminarRecord.getJenis().toLowerCase().contains("seminar usul"))
+                            else if (seminarRecord.getJenis().toLowerCase().contains(getContext().getString(R.string.seminar_usul_lower)))
                                 seminarUsul.add(seminarRecord);
-                            else if (seminarRecord.getJenis().toLowerCase().contains("seminar hasil"))
+                            else if (seminarRecord.getJenis().toLowerCase().contains(getContext().getString(R.string.seminar_hasil_lower)))
                                 seminarHasil.add(seminarRecord);
                         }
 

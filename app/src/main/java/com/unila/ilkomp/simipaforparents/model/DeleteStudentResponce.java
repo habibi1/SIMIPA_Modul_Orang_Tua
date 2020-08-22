@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class DeleteStudentResponce {
-
     @SerializedName("error")
     @Expose
     private Boolean error;
@@ -16,6 +15,9 @@ public class DeleteStudentResponce {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("id_relasi")
+    @Expose
+    private String idRelasi;
     @SerializedName("Total_records")
     @Expose
     private Integer totalRecords;
@@ -45,6 +47,14 @@ public class DeleteStudentResponce {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getIdRelasi() {
+        return idRelasi;
+    }
+
+    public void setIdRelasi(String idRelasi) {
+        this.idRelasi = idRelasi;
     }
 
     public Integer getTotalRecords() {

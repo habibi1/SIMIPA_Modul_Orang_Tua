@@ -1,5 +1,6 @@
 package com.unila.ilkomp.simipaforparents;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,17 +12,20 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.unila.ilkomp.simipaforparents.model.AddMahasiswaModel;
+import com.unila.ilkomp.simipaforparents.model.AddMahasiswaRecord;
 import com.unila.ilkomp.simipaforparents.model.AddMahasiswaResponce;
 import com.unila.ilkomp.simipaforparents.model.NotificationModel;
 import com.unila.ilkomp.simipaforparents.model.NotificationResponce;
 import com.unila.ilkomp.simipaforparents.model.NotificationSender;
 import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
+import com.unila.ilkomp.simipaforparents.util.NotificationControl;
 
 import java.util.Objects;
 
@@ -58,7 +62,7 @@ public class AddMahasiswaActivity extends AppCompatActivity implements View.OnCl
         String npm = inputNPM.getText().toString().trim();
         String no_hp = SharedPrefManager.getPhoneNumberLoggedInUser(getBaseContext());
 
-        AddMahasiswaModel addMahasiswaModel = new AddMahasiswaModel(npm, no_hp);
+        AddMahasiswaModel addMahasiswaModel = new AddMahasiswaModel(npm, no_hp, SharedPrefManager.getJWT(this));
 
         ApiService apiService = Client.getClient().create(ApiService.class);
 
@@ -74,29 +78,41 @@ public class AddMahasiswaActivity extends AppCompatActivity implements View.OnCl
                 if (response.isSuccessful()){
 
                     assert response.body() != null;
-                    if (response.body().getResponseCode() == 200){
-                        //sen notif
-                        sendNotifications(response.body().getRecords().get(0).getToken(),
-                                getResources().getString(R.string.student_notification_title_id_1),
-                        SharedPrefManager.getNameLoggedInUser(getApplicationContext())
-                                +"("+SharedPrefManager.getPhoneNumberLoggedInUser(getApplicationContext())+") "+
-                                getResources().getString(R.string.student_notification_message_id_1),
-                                getResources().getString(R.string.student_notification_channel_name_1),
-                                getResources().getString(R.string.student_notification_group_name_1),
-                                response.body().getId(),
-                                SharedPrefManager.getPhoneNumberLoggedInUser(getApplicationContext()),
-                                SharedPrefManager.getImageParent(getApplicationContext()));
+                    if (response.body().getResponseCode() == 200) {
+                        //send notification
 
-                        finishAffinity();
+                        for (AddMahasiswaRecord addMahasiswaRecord : response.body().getRecords()) {
+                            if (!addMahasiswaRecord.getToken().isEmpty()) {
+                                NotificationControl.sendNotifications(getApplicationContext(),
+                                        addMahasiswaRecord.getToken(),
+                                        getResources().getString(R.string.student_notification_title_id_1),
+                                        SharedPrefManager.getNameLoggedInUser(getApplicationContext())
+                                                + " (" + SharedPrefManager.getPhoneNumberLoggedInUser(getApplicationContext()) + ") " +
+                                                getResources().getString(R.string.student_notification_message_id_1),
+                                        getResources().getString(R.string.student_notification_channel_name_1),
+                                        getResources().getString(R.string.student_notification_group_name_1),
+                                        response.body().getIdRelasi(),
+                                        SharedPrefManager.getPhoneNumberLoggedInUser(getApplicationContext()),
+                                        SharedPrefManager.getImageParent(getApplicationContext()));
+                            }
+                        }
+
                         Intent intent = new Intent(AddMahasiswaActivity.this, ListStudentsActivity.class);
                         startActivity(intent);
+                        finishAffinity();
                     } else if (response.body().getResponseCode() == 400){
                         Snackbar.make(findViewById(android.R.id.content), response.body().getMessage(),
                                 Snackbar.LENGTH_SHORT).show();
                     } else if (response.body().getResponseCode() == 401){
                         Snackbar.make(findViewById(android.R.id.content), response.body().getMessage(),
                                 Snackbar.LENGTH_SHORT).show();
-                    } else if (response.body().getResponseCode() == 402){
+                    } else if (response.body().getResponseCode() == 402) {
+                        Snackbar.make(findViewById(android.R.id.content), response.body().getMessage(),
+                                Snackbar.LENGTH_SHORT).show();
+                    } else if (response.body().getResponseCode() == 404) {
+                        Snackbar.make(findViewById(android.R.id.content), response.body().getMessage(),
+                                Snackbar.LENGTH_SHORT).show();
+                    } else {
                         Snackbar.make(findViewById(android.R.id.content), response.body().getMessage(),
                                 Snackbar.LENGTH_SHORT).show();
                     }
@@ -118,59 +134,6 @@ public class AddMahasiswaActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
-/*        JSONObject request = new JSONObject();
-        try {
-            //Populate the request parameters
-            request.put("npm", inputNPM.getText().toString().trim());
-            request.put("no_hp", SharedPrefManager.getPhoneNumberLoggedInUser(getBaseContext()));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest jsArrayRequest = new JsonObjectRequest
-                (Request.Method.POST, BuildConfig.BASE_URL + "parent-create-student.php", request, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        pDialog.setVisibility(View.GONE);
-                        addNPM.setVisibility(View.VISIBLE);
-                        try {
-                            //Check if user got registered successfully
-                            if (response.getString("message").equals("Mahasiswa was created.")) {
-                                //Set the user session
-                                //finish();
-                                finishAffinity();
-                                Intent intent = new Intent(AddMahasiswaActivity.this, ListStudentsActivity.class);
-                                startActivity(intent);
-                            }else if(response.getString("message").equals("Mahasiswa Telah Terdaftar.")){
-                                //Display error message if username is already existsing
-                                Snackbar.make(findViewById(android.R.id.content), "Mahasiswa Telah Terdaftar.",
-                                        Snackbar.LENGTH_SHORT).show();
-                            }else if (response.getString("message").equals("Mahasiswa Tidak Terdaftar Di FMIPA.")){
-                                Snackbar.make(findViewById(android.R.id.content), "Mahasiswa Tidak Terdaftar Di FMIPA atau NPM salah.",
-                                        Snackbar.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        pDialog.setVisibility(View.GONE);
-                        addNPM.setVisibility(View.VISIBLE);
-
-                        //Display error message whenever an error occurs
-                        Toast.makeText(getApplicationContext(),
-                                error.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
-        // Access the RequestQueue through your singleton class.
-//        MySingleton.getInstance(this).addToRequestQueue(jsArrayRequest);
-        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(jsArrayRequest);*/
     }
 
     public void sendNotifications(String usertoken, String title, String message, String channel_id, String group_id, String id, String user, String photo_path) {
@@ -183,10 +146,13 @@ public class AddMahasiswaActivity extends AppCompatActivity implements View.OnCl
 
         Call<NotificationResponce> sendNotifcation = apiService.sendNotifcation(sender);
         sendNotifcation.enqueue(new Callback<NotificationResponce>() {
+
+            @SuppressLint("ShowToast")
             @Override
-            public void onResponse(Call<NotificationResponce> call, Response<NotificationResponce> response) {
-                Log.d("Token", response.code()+"");
+            public void onResponse(@NonNull Call<NotificationResponce> call, @NonNull Response<NotificationResponce> response) {
+                Log.d("Token", response.code() + "");
                 if (response.code() == 200) {
+                    assert response.body() != null;
                     if (response.body().success != 1) {
                         Toast.makeText(AddMahasiswaActivity.this, "Failed ", Toast.LENGTH_LONG);
                     } else {
@@ -196,7 +162,7 @@ public class AddMahasiswaActivity extends AppCompatActivity implements View.OnCl
             }
 
             @Override
-            public void onFailure(Call<NotificationResponce> call, Throwable t) {
+            public void onFailure(@NonNull Call<NotificationResponce> call, @NonNull Throwable t) {
                 Log.d("Token", "failed");
             }
         });
@@ -204,18 +170,16 @@ public class AddMahasiswaActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.add:
-                pDialog.setVisibility(View.VISIBLE);
-                addNPM.setVisibility(View.GONE);
+        if (v.getId() == R.id.add) {
+            pDialog.setVisibility(View.VISIBLE);
+            addNPM.setVisibility(View.GONE);
 
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                assert imm != null;
-                imm.hideSoftInputFromWindow(inputNPM.getWindowToken(), 0);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(inputNPM.getWindowToken(), 0);
 
-                if (Check(inputNPM.getText().toString().trim()))
-                    AddNPM();
-                break;
+            if (Check(inputNPM.getText().toString().trim()))
+                AddNPM();
         }
     }
 

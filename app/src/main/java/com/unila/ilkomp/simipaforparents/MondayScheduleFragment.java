@@ -14,10 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unila.ilkomp.simipaforparents.adapter.ScheduleAdapter;
+import com.unila.ilkomp.simipaforparents.model.ScheduleRecord;
 import com.unila.ilkomp.simipaforparents.model.ScheduleResponce;
 import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
 import com.unila.ilkomp.simipaforparents.util.TimeUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,7 +62,24 @@ public class MondayScheduleFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        getData();
+        progressBar.setVisibility(View.GONE);
+        ScheduleRecord scheduleRecord1 = new ScheduleRecord("Mobile Lanjut", "GIK L1C", "Ardiansyah, S.Kom., M.Kom.", "07:30:00", "09:10:00", "praktikum");
+        ScheduleRecord scheduleRecord2 = new ScheduleRecord("Matematika Diskrit", "GIK L1A", "Dr. Eng. Admi Syarif", "09:20:00", "11:00:00", "teori");
+        ScheduleRecord scheduleRecord3 = new ScheduleRecord("Rekayasa Perangkat Lunak", "GIK L2", "Astria Hijriani, S.Kom., M.Kom.", "11:10:00", "12:50:00", "praktikum");
+        ScheduleRecord scheduleRecord4 = new ScheduleRecord("Sistem Operasi", "GIK L1C", "Dwi Sakethi, M.Kom.", "13:30:00", "15:10:00", "teori");
+        ScheduleRecord scheduleRecord5 = new ScheduleRecord("Pengantar Sistem informasi", "GIK L1C", "Anie Rose Irawati, S.T., M.Cs.", "15:20:00", "17:00:00", "teori");
+        List<ScheduleRecord> coba = new ArrayList<>();
+        coba.add(scheduleRecord1);
+        coba.add(scheduleRecord2);
+        coba.add(scheduleRecord3);
+        coba.add(scheduleRecord4);
+        coba.add(scheduleRecord5);
+        scheduleAdapter = new ScheduleAdapter(getContext());
+        scheduleAdapter.setSchedule(coba);
+        scheduleAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(scheduleAdapter);
+
+        //getData();
 
         return root;
     }

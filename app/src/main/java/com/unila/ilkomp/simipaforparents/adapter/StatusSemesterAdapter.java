@@ -12,38 +12,38 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unila.ilkomp.simipaforparents.R;
-import com.unila.ilkomp.simipaforparents.model.ScholarshipRecord;
+import com.unila.ilkomp.simipaforparents.model.StatusSemesterRecord;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SppAdapter extends RecyclerView.Adapter<SppAdapter.ListViewHolder> {
+public class StatusSemesterAdapter extends RecyclerView.Adapter<StatusSemesterAdapter.ListViewHolder> {
     Context context;
-    private List<ScholarshipRecord> listScholarship = new ArrayList<>();
+    private List<StatusSemesterRecord> statusSemesterRecords = new ArrayList<>();
     private OnItemClickCallback listener;
-    private SppAdapter.OnItemClickCallback onItemClickCallback;
+    private StatusSemesterAdapter.OnItemClickCallback onItemClickCallback;
 
-    public SppAdapter(ArrayList<ScholarshipRecord> list) {
-        this.listScholarship = list;
+    public StatusSemesterAdapter(ArrayList<StatusSemesterRecord> list) {
+        this.statusSemesterRecords = list;
     }
 
-    public SppAdapter(Context context) {
+    public StatusSemesterAdapter(Context context) {
         this.context = context;
     }
 
-    public void setOnItemClickCallback(SppAdapter.OnItemClickCallback onItemClickCallback) {
+    public void setOnItemClickCallback(StatusSemesterAdapter.OnItemClickCallback onItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback;
     }
 
     @NonNull
     @Override
-    public SppAdapter.ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public StatusSemesterAdapter.ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_spp, parent, false);
-        return new SppAdapter.ListViewHolder(view);
+        return new StatusSemesterAdapter.ListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final SppAdapter.ListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final StatusSemesterAdapter.ListViewHolder holder, int position) {
 
         String semester;
         if ((position + 1) % 2 == 0)
@@ -51,16 +51,13 @@ public class SppAdapter extends RecyclerView.Adapter<SppAdapter.ListViewHolder> 
         else
             semester = " Ganjil";
 
-        ScholarshipRecord scholarshipRecord = listScholarship.get(position);
-        holder.tvCountSemester.setText(position + 1 + "");
-        holder.tvNameTahunSemester.setText(2016 + position / 2 + semester);
-        holder.tvIps.setText("IPS: 4.0");
-        holder.tvSks.setText("SKS: 24");
+        StatusSemesterRecord statusSemesterRecord = statusSemesterRecords.get(position);
+        holder.tvCountSemester.setText(statusSemesterRecord.getSemester());
+        holder.tvNameTahunSemester.setText(statusSemesterRecord.getPeriode());
+        holder.tvIps.setText("IPS: " + statusSemesterRecord.getIps());
+        holder.tvSks.setText("SKS: " + statusSemesterRecord.getSks());
 
-        if (semester.contains("Ganjil"))
-            holder.tvStatus.setText("Aktif");
-        else
-            holder.tvStatus.setText("Tidak Aktif");
+        holder.tvStatus.setText(statusSemesterRecord.getStatus());
 
         if (holder.tvStatus.getText().toString().contains("Tidak")) {
             holder.ivStatus.setImageResource(R.drawable.ic_cancel_red_24dp);
@@ -69,19 +66,19 @@ public class SppAdapter extends RecyclerView.Adapter<SppAdapter.ListViewHolder> 
         }
     }
 
-    public void setListScholarship(List<ScholarshipRecord> scholarship) {
-        if (scholarship == null) return;
-        this.listScholarship.clear();
-        this.listScholarship.addAll(scholarship);
+    public void setListStatusSemester(List<StatusSemesterRecord> statusSemesterRecords) {
+        if (statusSemesterRecords == null) return;
+        this.statusSemesterRecords.clear();
+        this.statusSemesterRecords.addAll(statusSemesterRecords);
     }
 
     @Override
     public int getItemCount() {
-        return listScholarship.size();
+        return statusSemesterRecords.size();
     }
 
     public interface OnItemClickCallback {
-        void onItemClicked(ScholarshipRecord data);
+        void onItemClicked(StatusSemesterRecord data);
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder {

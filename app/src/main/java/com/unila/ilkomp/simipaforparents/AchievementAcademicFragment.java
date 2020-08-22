@@ -14,9 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unila.ilkomp.simipaforparents.adapter.AchievementAdapter;
+import com.unila.ilkomp.simipaforparents.model.AchievementRecord;
 import com.unila.ilkomp.simipaforparents.model.AchievementResponce;
 import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,7 +79,24 @@ public class AchievementAcademicFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        getData();
+        progressBar.setVisibility(View.GONE);
+        AchievementRecord scheduleRecord1 = new AchievementRecord("1617051103", "Gemastik", "Nasional", "Juara 1", "2016", "Ristekdikti", "Ketua");
+        AchievementRecord scheduleRecord2 = new AchievementRecord("1617051103", "PIMNAS", "Nasional", "Juara 3", "2018", "Ristekdikti", "Ketua");
+        AchievementRecord scheduleRecord3 = new AchievementRecord("1617051103", "Comfest", "Nasional", "Juara 2", "2018", "Universitas Indonesia", "Anggota");
+        AchievementRecord scheduleRecord4 = new AchievementRecord("1617051103", "PRJ", "Lokal", "Juara 1", "2019", "Himakom Unila", "Ketua");
+        AchievementRecord scheduleRecord5 = new AchievementRecord("1617051103", "Google Kick Star", "Internasional", "Juara 3", "2020", "Google", "Ketua");
+        List<AchievementRecord> coba = new ArrayList<>();
+        coba.add(scheduleRecord1);
+        coba.add(scheduleRecord2);
+        coba.add(scheduleRecord3);
+        coba.add(scheduleRecord4);
+        coba.add(scheduleRecord5);
+        achievementAdapter = new AchievementAdapter(getContext());
+        achievementAdapter.setAchievement(coba);
+        achievementAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(achievementAdapter);
+
+        //getData();
 
         return root;
     }

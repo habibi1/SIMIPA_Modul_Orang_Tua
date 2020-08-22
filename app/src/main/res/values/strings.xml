@@ -17,7 +17,7 @@
     <string name="nol">0</string>
     <string name="register">Register</string>
     <string name="title_prestasi">Prestasi</string>
-    <string name="nama">Name</string>
+    <string name="nama">Nama</string>
     <string name="npm">NPM</string>
     <string name="akademik">Akademik</string>
     <string name="non_akademik">Non Akademik</string>
@@ -33,8 +33,16 @@
     <string name="npm_mahasiswa">NPM Mahasiswa</string>
     <string name="tambah">Tambah</string>
     <string name="masukkan_npm_mahasiswa">Masukkan NPM Mahasiswa</string>
-    <string name="keluar">Keluar</string>
     <string name="harus_diisi">Harus diisi!</string>
+    <string name="gagal_update_token">Gagal memperbaharui token</string>
+    <string name="terjadi_kesalahan_update_token">Terjadi kesalahan saat memperbaharui token</string>
+    <string name="izin_diberikan">Izin diberikan</string>
+    <string name="izin_ditolak">Izin ditolak</string>
+    <string name="gagal_mengirim_notifikasi">Gagal mengirim notifikasi!</string>
+    <string name="belum_dikonfirmasi">Belum dikonfirmasi</string>
+    <string name="ditolak">Ditolak</string>
+    <string name="belum">Belum</string>
+    <string name="null_string" />
 
     <string-array name="options_semester">
         <item>Semester Ganjil</item>
@@ -50,7 +58,7 @@
     <string name="desc_foto_profil_orang_tua">Foto profil orang tua</string>
     <string name="desc_ganti_foto_profil_orang_tua">Tombol ganti foto profil orang tua</string>
     <string name="nama_orang_tua">Nama orang tua</string>
-    <string name="nomor_telepon_orang_tua">nomor telepon orang tua</string>
+    <string name="nomor_telepon_orang_tua">Nomor telepon</string>
     <string name="hapus_mahasiswa">Hapus Mahasiswa</string>
     <string name="bantuan">Bantuan</string>
     <string name="desc_gone" />
@@ -112,9 +120,13 @@
     <string name="daftar_seminar_usul">Daftar Seminar Usul</string>
     <string name="daftar_seminar_hasil">Daftar Seminar Hasil</string>
     <string name="teks_konfirmasi_hapus">Apakah anda yakin untuk menghapus mahasiswa tersebut dari daftar anda?</string>
+    <string name="teks_konfirmasi_logout">Apakah anda ingin keluar dari akun anda?</string>
+    <string name="teks_konfirmasi_batalkan_permintaan">Apakah anda ingin membatalkan permintaan?</string>
     <string name="hapus">Hapus</string>
     <string name="batal">Batal</string>
     <string name="lihat">Lihat</string>
+    <string name="keluar">Keluar</string>
+    <string name="batalkan">Batalkan</string>
 
     <string name="data_kosong">Data Kosong</string>
     <string name="tanggal_lahir">Tanggal Lahir</string>
@@ -146,50 +158,96 @@
     <string name="gagal_dihapus">Gagal dihapus. Coba lagi!</string>
     <string name="gagal_ditolak">Gagal ditolak. Coba lagi!</string>
     <string name="gagal_disetujui">Gagal dikonfirmasi. Coba lagi!</string>
-    <string name="berhasil_dihapus">Data permintaan dihapus</string>
+    <string name="berhasil_dihapus">Data berhasil dihapus</string>
     <string name="berhasil_ditolak">Data permintaan ditolak</string>
     <string name="berhasil_disetujui">Data permintaan dikonfirmasi</string>
+    <string name="nomor_sudah_terdaftar">Nomor sudah terdaftar.</string>
+    <string name="timer_belum_selesai">Timer belum selesai</string>
+
+    <string name="senin">Senin</string>
+    <string name="selasa">Selasa</string>
+    <string name="rabu">Rabu</string>
+    <string name="kamis">Kamis</string>
+    <string name="jumat">Jumat</string>
+
+    <string name="teori">teori</string>
+    <string name="praktikum">praktikum</string>
+
+    <string name="seminar">Seminar</string>
+    <string name="bimbingan">Bimbingan</string>
+
+    <string name="seminar_kerja_lower">seminar kerja</string>
+    <string name="seminar_usul_lower">seminar usul</string>
+    <string name="seminar_hasil_lower">seminar hasil</string>
+
+    <string name="diajukan_lower">diajukan</string>
+    <string name="diterima_lower">diterima</string>
+    <string name="ditolak_lower">ditolak</string>
+
+    <string-array name="jadwal_coba">
+        <item>dsdfd</item>
+        <item>dssasasd</item>
+    </string-array>
 
     <!--Start notification for parent-->
     <string name="parent_notification_channel_name_1">PARENT_CHANNEL_SIMIPA_REQUEST</string>
     <string name="parent_notification_channel_name_2">PARENT_CHANNEL_SIMIPA_DELETE</string>
     <string name="parent_notification_channel_name_3">PARENT_CHANNEL_SIMIPA_REJECT</string>
     <string name="parent_notification_channel_name_4">PARENT_CHANNEL_SIMIPA_APPROVED</string>
+    <string name="parent_notification_channel_name_5">PARENT_CHANNEL_SIMIPA_CANCEL_REQUEST</string>
     <string name="parent_notification_channel_id_1">PARENT_CHANNEL_SIMIPA_1</string>
     <string name="parent_notification_channel_id_2">PARENT_CHANNEL_SIMIPA_2</string>
     <string name="parent_notification_channel_id_3">PARENT_CHANNEL_SIMIPA_3</string>
     <string name="parent_notification_channel_id_4">PARENT_CHANNEL_SIMIPA_4</string>
+    <string name="parent_notification_channel_id_5">PARENT_CHANNEL_SIMIPA_5</string>
     <string name="parent_notification_group_name_1">PARENT_GROUP_SIMIPA_REQUEST</string>
     <string name="parent_notification_group_name_2">PARENT_GROUP_SIMIPA_DELETE</string>
     <string name="parent_notification_group_name_3">PARENT_GROUP_SIMIPA_REJECT</string>
     <string name="parent_notification_group_name_4">PARENT_GROUP_SIMIPA_APPROVED</string>
+    <string name="parent_notification_group_name_5">PARENT_GROUP_SIMIPA_CANCEL_REQUEST</string>
     <string name="parent_notification_group_id_1">PARENT_GROUP_SIMIPA_1</string>
     <string name="parent_notification_group_id_2">PARENT_GROUP_SIMIPA_2</string>
     <string name="parent_notification_group_id_3">PARENT_GROUP_SIMIPA_3</string>
     <string name="parent_notification_group_id_4">PARENT_GROUP_SIMIPA_4</string>
+    <string name="parent_notification_group_id_5">PARENT_GROUP_SIMIPA_5</string>
     <string name="parent_notification_title_id_1">TBA</string>
     <string name="parent_notification_title_id_2">Akses dihapus mahasiswa</string>
     <string name="parent_notification_title_id_3">Permintaan ditolak</string>
     <string name="parent_notification_title_id_4">Permintaan dikonfirmasi</string>
+    <string name="parent_notification_title_id_5">Permintaan dibatalkan</string>
     <string name="parent_notification_message_id_1">TBA</string>
     <string name="parent_notification_message_id_2">menghapus anda dalam daftar perizinan akses data perkuliahannya.</string>
     <string name="parent_notification_message_id_3">menolak permintaan anda untuk mengakses data perkuliahannya.</string>
     <string name="parent_notification_message_id_4">mengkonfirmasi permintaan anda untuk mengakses data perkuliahannya.</string>
+    <string name="parent_notification_message_id_5">membatalkan permintaan untuk mengakses data perkuliahan anda.</string>
     <!--End notification for parent-->
 
     <!--Start notification for student-->
     <string name="student_notification_channel_name_1">STUDENT_CHANNEL_SIMIPA_REQUEST</string>
     <string name="student_notification_channel_name_2">STUDENT_CHANNEL_SIMIPA_DELETE</string>
+    <string name="student_notification_channel_name_3">STUDENT_CHANNEL_SIMIPA_CANCEL_REQUEST</string>
     <string name="student_notification_channel_id_1">STUDENT_CHANNEL_SIMIPA_1</string>
     <string name="student_notification_channel_id_2">STUDENT_CHANNEL_SIMIPA_2</string>
+    <string name="student_notification_channel_id_3">STUDENT_CHANNEL_SIMIPA_3</string>
     <string name="student_notification_group_name_1">STUDENT_GROUP_SIMIPA_REQUEST</string>
     <string name="student_notification_group_name_2">STUDENT_GROUP_SIMIPA_DELETE</string>
+    <string name="student_notification_group_name_3">STUDENT_GROUP_SIMIPA_CANCEL_REQUEST</string>
     <string name="student_notification_group_id_1">STUDENT_GROUP_SIMIPA_1</string>
     <string name="student_notification_group_id_2">STUDENT_GROUP_SIMIPA_2</string>
+    <string name="student_notification_group_id_3">STUDENT_GROUP_SIMIPA_3</string>
     <string name="student_notification_title_id_1">Permintaan akses data</string>
     <string name="student_notification_title_id_2">Perizinan akses data dihapus</string>
+    <string name="student_notification_title_id_3">Permintaan dibatalkan</string>
     <string name="student_notification_message_id_1">meminta untuk mengakses data perkuliahan anda.</string>
     <string name="student_notification_message_id_2">menghapus izinnya untuk mengakses data perkuliahan anda.</string>
+    <string name="student_notification_message_id_3">membatalkan permintaan untuk mengakses data perkuliahan anda.</string>
+    <string name="kelola_mahasiswa">Kelola Mahasiswa</string>
+    <string name="status_semester">Status Semester</string>
+    <string name="beranda">Beranda</string>
+    <string name="halo">Halo,</string>
+    <string name="nama_jadwal">Nama Jadwal</string>
+    <string name="tempat">Tempat</string>
+    <string name="nama_dosen">Nama Dosen</string>
+    <string name="nama_prestasi">Nama Prestasi</string>
     <!--End notification for student-->
-
 </resources>

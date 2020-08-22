@@ -50,17 +50,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ListVi
         holder.tempat_schedule.setText(schedule.getRuang());
         holder.dosen_schedule.setText(schedule.getDosenPJ());
 
-        if (schedule.getJenis().equals("Teori"))
+        if (schedule.getJenis().toLowerCase().equals(context.getString(R.string.teori)))
             holder.line_schedule.setImageResource(R.drawable.line_schedule_green);
-        else if (schedule.getJenis().equals("Praktikum"))
+        else if (schedule.getJenis().toLowerCase().equals(context.getString(R.string.praktikum)))
             holder.line_schedule.setImageResource(R.drawable.line_schedule_purle);
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onItemClickCallback.onItemClicked(listSchedule.get(holder.getAdapterPosition()));
-//            }
-//        });
     }
 
     public void setSchedule(List<ScheduleRecord> scheduleRecords){

@@ -2,15 +2,12 @@ package com.unila.ilkomp.simipaforparents;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +30,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.unila.ilkomp.simipaforparents.model.LoginRecord;
 import com.unila.ilkomp.simipaforparents.model.LoginResponce;
-import com.unila.ilkomp.simipaforparents.model.UpdateTokenResponce;
 import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
 
@@ -42,11 +38,13 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 
 import static com.unila.ilkomp.simipaforparents.util.ControlUtil.elapseClick;
+import static com.unila.ilkomp.simipaforparents.util.DeviceIDUtil.getUniqueIMEIId;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -76,9 +74,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         reqPhonePermission();
-
-        imei = getUniqueIMEIId(this);
-        ip = getIP();
 
         //make translucent statusBar on kitkat devices
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
@@ -117,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String teks_password = input_password.getText().toString().trim();
 
                 if (Check(teks_telepon, teks_password)){
-                    Login(teks_telepon, teks_password, imei, ip);
+                    makeToken(teks_telepon, teks_password);
                 }
                 break;
             case R.id.tv_register:
@@ -131,6 +126,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String phone_ip;
 
         WifiManager wm = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        assert wm != null;
         phone_ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
 
         if (phone_ip.equals("0.0.0.0")){
@@ -150,32 +146,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         return phone_ip;
-    }
-
-    public String getUniqueIMEIId(Context context) {
-
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        String imei;
-
-        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-                imei = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                imei = telephonyManager.getImei();
-            } else {
-                imei = telephonyManager.getDeviceId();
-            }
-
-            if (imei != null && !imei.isEmpty()) {
-                return imei;
-            } else {
-                return android.os.Build.SERIAL;
-            }
-
-        }
-
-        return "not_found";
     }
 
     private void reqPhonePermission(){
@@ -198,38 +168,35 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void Login(final String teks_telepon, final String teks_password, final String teks_imei, final String teks_ip) {
+    private void loginUser(final String teks_telepon, final String teks_password, final String token) {
 
         ApiService apiService = Client.getClient().create(ApiService.class);
 
-        Call<LoginResponce> loginProcess = apiService.login(teks_telepon, teks_password, teks_imei, teks_ip);
+        imei = getUniqueIMEIId(getApplicationContext());
+        ip = getIP();
+
+        Call<LoginResponce> loginProcess = apiService.login(teks_telepon, teks_password, imei, ip, token);
         loginProcess.enqueue(new Callback<LoginResponce>() {
             @Override
             public void onResponse(Call<LoginResponce> call, retrofit2.Response<LoginResponce> response) {
-                if (response.code() != 500){
-                    if (response.body().getResponseCode() == 200){
+                if (response.isSuccessful()) {
+                    assert response.body() != null;
+                    if (response.body().getResponseCode() == 200) {
                         List<LoginRecord> loginRecord = response.body().getRecords();
 
-                        FirebaseInstanceId.getInstance().getInstanceId()
-                                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                                        if (!task.isSuccessful()) {
-                                            Log.w("Token", "getInstanceId failed", task.getException());
-                                            return;
-                                        }
+                        Log.d("token", token);
+                        Log.d("imei", imei);
+                        Log.d("ip", ip);
 
-                                        // Get new Instance ID token
-                                        String token = task.getResult().getToken();
+                        SharedPrefManager.setPhoneNumberLoggedInUser(getBaseContext(), teks_telepon);
+                        SharedPrefManager.setNameLoggedInUser(getBaseContext(), loginRecord.get(0).getDisplayName());
+                        SharedPrefManager.setImageParent(getBaseContext(), loginRecord.get(0).getFoto());
+                        SharedPrefManager.setJWT(getBaseContext(), loginRecord.get(0).getJWT());
+                        SharedPrefManager.setLoggedInStatus(getBaseContext(), true);
 
-                                        UpdateToken(teks_telepon, teks_imei, token, loginRecord);
-
-                                        // Log and toast
-//                                        String msg = getString(R.string.msg_token_fmt, token);
-                                        Log.d("Token", token);
-//                                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                        Intent intent = new Intent(LoginActivity.this, ListStudentsActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        startActivity(intent);
 
                     } else {
                         progressBar.setVisibility(View.GONE);
@@ -257,69 +224,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    public void UpdateToken(String telepon, String imei, String token, List<LoginRecord> loginRecord) {
-        ApiService apiService = Client.getClient().create(ApiService.class);
-
-        Call<UpdateTokenResponce> updateToken = apiService.updateToken(telepon, imei, token);
-        updateToken.enqueue(new Callback<UpdateTokenResponce>() {
-            @Override
-            public void onResponse(Call<UpdateTokenResponce> call, retrofit2.Response<UpdateTokenResponce> response) {
-
-                if (response.isSuccessful()) {
-                    assert response.body() != null;
-                    if (response.body().getResponseCode() == 200) {
-
-                        if (response.body().getTotalRecords() > 0){
-                            Log.d("Update Token", "Success Refreshed token to Server: " + token);
-
-                            SharedPrefManager.setPhoneNumberLoggedInUser(getBaseContext(), telepon);
-                            SharedPrefManager.setNameLoggedInUser(getBaseContext(), loginRecord.get(0).getNama());
-                            SharedPrefManager.setImageParent(getBaseContext(), loginRecord.get(0).getFoto());
-                            SharedPrefManager.setLoggedInStatus(getBaseContext(),true);
-
-                            Intent intent = new  Intent(LoginActivity.this, ListStudentsActivity.class);
-                            startActivity(intent);
-                            finish();
-
-                        } else {
-                            Log.d("Update Token", "Failed Refreshed token to Server: " + response.message());
-
-                            progressBar.setVisibility(View.GONE);
-                            login.setVisibility(View.VISIBLE);
-                            Snackbar.make(findViewById(android.R.id.content), "Gagal memperbaharui token.",
-                                    Snackbar.LENGTH_SHORT).show();
+    public void makeToken(final String username, final String password) {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("Token", "getInstanceId failed", task.getException());
+                            return;
                         }
 
-                    } else if (response.body().getResponseCode() == 400){
-                        Log.d("Update Token", "Something Wrong!!!");
+                        // Get new Instance ID token
+                        String token = Objects.requireNonNull(task.getResult()).getToken();
 
-                        progressBar.setVisibility(View.GONE);
-                        login.setVisibility(View.VISIBLE);
-                        Snackbar.make(findViewById(android.R.id.content), "Terjadi kesalahan saat memperbaharui token.",
-                                Snackbar.LENGTH_SHORT).show();
+                        loginUser(username, password, token);
 
+                        Log.d("Token", token);
                     }
-                } else {
-                    Log.d("Update Token", "Something Wrong!!!");
-                    progressBar.setVisibility(View.GONE);
-                    login.setVisibility(View.VISIBLE);
-
-                    Snackbar.make(findViewById(android.R.id.content), getResources().getString(R.string.terjadi_kesalahan),
-                            Snackbar.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UpdateTokenResponce> call, Throwable t) {
-                Log.d("Update Token", "Server Error!!!");
-
-                progressBar.setVisibility(View.GONE);
-                login.setVisibility(View.VISIBLE);
-
-                Snackbar.make(findViewById(android.R.id.content), getResources().getString(R.string.server_error),
-                        Snackbar.LENGTH_SHORT).show();
-            }
-        });
+                });
     }
 
     private boolean Check(String telepon, String password) {
@@ -349,4 +271,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         win.setAttributes(winParams);
     }
+
 }

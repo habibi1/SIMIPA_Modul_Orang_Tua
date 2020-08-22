@@ -106,13 +106,6 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
                 holder.dialogAchievementDetail.dismiss();
             }
         });
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onItemClickCallback.onItemClicked(listSchedule.get(holder.getAdapterPosition()));
-//            }
-//        });
     }
 
     public void setAchievement(List<AchievementRecord> achievement){

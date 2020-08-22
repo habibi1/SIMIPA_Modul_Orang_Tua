@@ -52,7 +52,7 @@ public class CountSeminarAdapter extends RecyclerView.Adapter<CountSeminarAdapte
         holder.dialogNamaMahasiswa.setText(countSeminarRecord.getNama());
         holder.dialogNpmMahasiswa.setText(countSeminarRecord.getNPM());
         holder.dialogJudulSeminar.setText(countSeminarRecord.getJudul());
-        holder.dialogWaktuSeminar.setText(countSeminarRecord.getWaktu());
+        holder.dialogWaktuSeminar.setText(countSeminarRecord.getWaktu().substring(0, 5));
         holder.dialogTanggalSeminar.setText(countSeminarRecord.getTanggal());
         holder.dialogRuangSeminar.setText(countSeminarRecord.getRuang());
         holder.dialogJumlahPeserta.setText(countSeminarRecord.getPeserta());

@@ -40,11 +40,11 @@ public class ScheduleActivity extends AppCompatActivity implements MondaySchedul
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new MondayScheduleFragment(), "Senin");
-        adapter.addFrag(new TuesdayScheduleFragment(), "Selasa");
-        adapter.addFrag(new WednesdayScheduleFragment(), "Rabu");
-        adapter.addFrag(new ThursdayScheduleFragment(), "Kamis");
-        adapter.addFrag(new FridayScheduleFragment(), "Jumat");
+        adapter.addFrag(new MondayScheduleFragment(), getString(R.string.senin));
+        adapter.addFrag(new TuesdayScheduleFragment(), getString(R.string.selasa));
+        adapter.addFrag(new WednesdayScheduleFragment(), getString(R.string.rabu));
+        adapter.addFrag(new ThursdayScheduleFragment(), getString(R.string.kamis));
+        adapter.addFrag(new FridayScheduleFragment(), getString(R.string.jumat));
         viewPager.setAdapter(adapter);
     }
 

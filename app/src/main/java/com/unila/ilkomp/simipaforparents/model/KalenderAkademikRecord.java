@@ -3,8 +3,8 @@ package com.unila.ilkomp.simipaforparents.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import static com.unila.ilkomp.simipaforparents.util.TimeUtil.getDateDDMMMMYYYY;
 import static com.unila.ilkomp.simipaforparents.util.TimeUtil.getDateDD;
+import static com.unila.ilkomp.simipaforparents.util.TimeUtil.getDateDDMMMMYYYY;
 
 public class KalenderAkademikRecord {
 
@@ -32,6 +32,12 @@ public class KalenderAkademikRecord {
     @SerializedName("Status")
     @Expose
     private String status;
+
+    public KalenderAkademikRecord(String kegiatan, String date, String dueDate) {
+        this.kegiatan = kegiatan;
+        this.date = date;
+        this.dueDate = dueDate;
+    }
 
     public String getId() {
         return id;

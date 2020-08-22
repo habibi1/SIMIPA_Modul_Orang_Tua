@@ -32,15 +32,13 @@ public class IntroActivity extends AppCompatActivity {
     private CheckFirstTimeLaunchManager prefManager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Checking for first time launch - before calling setContentView()
         prefManager = new CheckFirstTimeLaunchManager(this);
-        if (!prefManager.isFirstTimeLaunch()) {
-            launchHomeScreen();
-            //finish();
-        }
+        if (!prefManager.isFirstTimeLaunch())
+            launchLoginActivity();
 
         // Making notification bar transparent
         if (Build.VERSION.SDK_INT >= 21) {
@@ -49,10 +47,10 @@ public class IntroActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_intro);
 
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        btnSkip = (Button) findViewById(R.id.btn_skip);
-        btnNext = (Button) findViewById(R.id.btn_next);
+        viewPager = findViewById(R.id.view_pager);
+        dotsLayout = findViewById(R.id.layoutDots);
+        btnSkip = findViewById(R.id.btn_skip);
+        btnNext = findViewById(R.id.btn_next);
 
 
         // layouts of all welcome sliders
@@ -79,7 +77,7 @@ public class IntroActivity extends AppCompatActivity {
                 int current = getItem(+1);
                 if (current < layouts.length) {
                     // move to next screen
-                    launchHomeScreen();
+                    launchLoginActivity();
                 }
             }
         });
@@ -94,7 +92,7 @@ public class IntroActivity extends AppCompatActivity {
                     // move to next screen
                     viewPager.setCurrentItem(current);
                 } else {
-                    launchHomeScreen();
+                    launchLoginActivity();
                 }
             }
         });
@@ -123,7 +121,7 @@ public class IntroActivity extends AppCompatActivity {
         return viewPager.getCurrentItem() + i;
     }
 
-    private void launchHomeScreen() {
+    private void launchLoginActivity() {
         prefManager.setFirstTimeLaunch(false);
         startActivity(new Intent(IntroActivity.this, LoginActivity.class));
         finishAffinity();

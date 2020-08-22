@@ -32,21 +32,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.unila.ilkomp.simipaforparents.model.SignUpResponce;
 import com.unila.ilkomp.simipaforparents.model.UploadImageResponce;
 import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,7 +53,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-import static com.unila.ilkomp.simipaforparents.BuildConfig.BASE_URL;
 import static com.unila.ilkomp.simipaforparents.util.ControlUtil.elapseClick;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
@@ -79,6 +70,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private static final int STATE_READ_EXTERNAL_STORAGE = 7;
 
     private long mLastClickTime = 0;
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSION_STORAGE = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
@@ -162,33 +158,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    @Override
-    public void onClick(View v) {
+    public static void verifyStoragePermissions(Activity activity) {
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        elapseClick();
+        if (permission != PackageManager.PERMISSION_GRANTED) {
 
-        switch (v.getId()){
-            case R.id.btn_register:
-                if(checkField()) {
-                    register.setVisibility(View.GONE);
-                    progressBar_register.setVisibility(View.VISIBLE);
-                    registerUser();
-                }
-                break;
-            case R.id.imageButton:
-                showPopUpChoosePhoto();
-                break;
-            case R.id.phone_number:
-                //belum work
-                text_message = "Nomor sudah terverifikasi.";
-                setToast = false;
-
-                phoneNumber.setFocusable(true);
-                phoneNumber.setFocusableInTouchMode(true);
-                phoneNumber.requestFocus();
-
-                showToastOrSnackbar(text_message, setToast);
-                break;
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSION_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
         }
     }
 
@@ -340,59 +319,38 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         return image;
     }
 
-    private void registerUser() {
+    @Override
+    public void onClick(View v) {
 
-        String filePath = getRealPathFromURIPath(imageUri,SignUpActivity.this);
-        File file = new File(filePath);
+        elapseClick();
 
-        //displayLoader();
-        JSONObject request = new JSONObject();
-        try {
-            //Populate the request parameters
-            request.put("no_hp", phoneNumber.getText().toString().trim());
-            request.put("nama", parentsName.getText().toString().trim());
-            request.put("password", password.getText().toString().trim());
-            request.put("npm", npmStudent.getText().toString().trim());
-            request.put("foto", file.getName());
+        switch (v.getId()) {
+            case R.id.btn_register:
+                if (checkField()) {
+                    register.setVisibility(View.GONE);
+                    progressBar_register.setVisibility(View.VISIBLE);
+                    registerUser();
+                }
+                break;
+            case R.id.imageButton:
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STATE_READ_EXTERNAL_STORAGE);
+                } else {
+                    showPopUpChoosePhoto();
+                }
+                break;
+            case R.id.phone_number:
+                //belum work
+                text_message = "Nomor sudah terverifikasi.";
+                setToast = false;
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+                phoneNumber.setFocusable(true);
+                phoneNumber.setFocusableInTouchMode(true);
+                phoneNumber.requestFocus();
+
+                showToastOrSnackbar(text_message, setToast);
+                break;
         }
-        JsonObjectRequest jsArrayRequest = new JsonObjectRequest
-                (Request.Method.POST, BASE_URL + "register-parent.php", request, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        //pDialog.dismiss();
-                        try {
-                            //Check if user got registered successfully
-                            if (response.getString("message").equals("User was created.")) {
-                                //Set the user session
-                                uploadImage();
-                            } else {
-                                register.setVisibility(View.VISIBLE);
-                                progressBar_register.setVisibility(View.GONE);
-                                Toast.makeText(getApplicationContext(),
-                                        response.getString("message"), Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //pDialog.dismiss();
-
-                        //Display error message whenever an error occurs
-                        Toast.makeText(getApplicationContext(),
-                                error.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
-        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(jsArrayRequest);
     }
 
     private void uploadImage(){
@@ -447,6 +405,61 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
             return cursor.getString(idx);
         }
+    }
+
+    private void registerUser() {
+
+        String filePath = getRealPathFromURIPath(imageUri, SignUpActivity.this);
+        File file = new File(filePath);
+
+        RequestBody mFile = RequestBody.create(MediaType.parse("multipart/form-data"), file); //membungkus file ke dalam request body
+        MultipartBody.Part foto = MultipartBody.Part.createFormData("foto", file.getName(), mFile); // membuat formdata multipart berisi request body
+
+        RequestBody requestBodyNoHp = RequestBody.create(MediaType.parse("text/plain"), phoneNumber.getText().toString().trim());
+        RequestBody requestBodyNama = RequestBody.create(MediaType.parse("text/plain"), parentsName.getText().toString().trim());
+        RequestBody requestBodyPassword = RequestBody.create(MediaType.parse("text/plain"), password.getText().toString().trim());
+        RequestBody requestBodynpm = RequestBody.create(MediaType.parse("text/plain"), npmStudent.getText().toString().trim());
+        RequestBody requestBodyNamaFoto = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
+        ApiService apiInterface = Client.getClient().create(ApiService.class);
+        Call<SignUpResponce> registerUser = apiInterface.register(foto, requestBodyNoHp, requestBodyNama, requestBodyPassword, requestBodynpm, requestBodyNamaFoto);
+        registerUser.enqueue(new Callback<SignUpResponce>() {
+            @Override
+            public void onResponse(Call<SignUpResponce> call, retrofit2.Response<SignUpResponce> response) {
+
+                if (response.isSuccessful()) {
+                    assert response.body() != null;
+                    if (response.body().getResponseCode() == 200) {
+
+                        Snackbar.make(findViewById(android.R.id.content), response.body().getMessage(),
+                                Snackbar.LENGTH_SHORT).show();
+
+                        updateUI();
+                    } else {
+
+                        register.setVisibility(View.VISIBLE);
+                        progressBar_register.setVisibility(View.GONE);
+
+                        Snackbar.make(findViewById(android.R.id.content), response.body().getMessage(),
+                                Snackbar.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SignUpResponce> call, Throwable t) {
+                Toast.makeText(SignUpActivity.this, "error1" + t.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(SignUpActivity.this, "error2" + call.toString(), Toast.LENGTH_LONG).show();
+
+                register.setVisibility(View.VISIBLE);
+                progressBar_register.setVisibility(View.GONE);
+
+                Snackbar.make(findViewById(android.R.id.content), getString(R.string.server_error),
+                        Snackbar.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void updateUI() {

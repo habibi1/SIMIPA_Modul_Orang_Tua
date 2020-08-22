@@ -14,10 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unila.ilkomp.simipaforparents.adapter.KalenderAkademikAdapter;
+import com.unila.ilkomp.simipaforparents.model.KalenderAkademikRecord;
 import com.unila.ilkomp.simipaforparents.model.KalenderAkademikResponce;
 import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
 import com.unila.ilkomp.simipaforparents.util.TimeUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,7 +89,34 @@ public class KalenderAkademikGanjilFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        getData();
+        progressBar.setVisibility(View.GONE);
+        KalenderAkademikRecord kalenderAkademikRecord1 = new KalenderAkademikRecord("Pembayaran UKT", "2020-07-20", "2020-08-21");
+        KalenderAkademikRecord kalenderAkademikRecord2 = new KalenderAkademikRecord("Registrasi SNMPTN", "2020-06-29", "2020-07-13");
+        KalenderAkademikRecord kalenderAkademikRecord3 = new KalenderAkademikRecord("Registrasi SBMPTN", "2020-08-24", "2020-09-02");
+        KalenderAkademikRecord kalenderAkademikRecord4 = new KalenderAkademikRecord("Registrasi Simanila - SNMPTN", "2020-09-03", "2020-09-09");
+        KalenderAkademikRecord kalenderAkademikRecord5 = new KalenderAkademikRecord("Registrasi Simanila - Pararel", "2020-08-31", "2020-09-04");
+        KalenderAkademikRecord kalenderAkademikRecord6 = new KalenderAkademikRecord("Registrasi Simanila - PMPAP", "2020-08-31", "2020-09-04");
+        KalenderAkademikRecord kalenderAkademikRecord7 = new KalenderAkademikRecord("Registrasi Simanila - Prestasi Khusus", "2020-09-03", "2020-09-18");
+        KalenderAkademikRecord kalenderAkademikRecord8 = new KalenderAkademikRecord("Registrasi Simanila - Vokasi", "2020-09-11", "2020-09-18");
+        KalenderAkademikRecord kalenderAkademikRecord9 = new KalenderAkademikRecord("Registrasi Pascasarjana - Gelombang I", "2020-01-13", "2020-04-03");
+        KalenderAkademikRecord kalenderAkademikRecord10 = new KalenderAkademikRecord("Registrasi Pascasarjana - Gel. II", "2020-01-13", "2020-04-03");
+        List<KalenderAkademikRecord> coba = new ArrayList<>();
+        coba.add(kalenderAkademikRecord1);
+        coba.add(kalenderAkademikRecord2);
+        coba.add(kalenderAkademikRecord3);
+        coba.add(kalenderAkademikRecord4);
+        coba.add(kalenderAkademikRecord5);
+        coba.add(kalenderAkademikRecord6);
+        coba.add(kalenderAkademikRecord7);
+        coba.add(kalenderAkademikRecord8);
+        coba.add(kalenderAkademikRecord9);
+        coba.add(kalenderAkademikRecord10);
+        kalenderAkademikAdapter = new KalenderAkademikAdapter(getActivity().getApplicationContext());
+        kalenderAkademikAdapter.setListKalenderAkademik(coba);
+        kalenderAkademikAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(kalenderAkademikAdapter);
+
+//        getData();
 
         return root;
     }

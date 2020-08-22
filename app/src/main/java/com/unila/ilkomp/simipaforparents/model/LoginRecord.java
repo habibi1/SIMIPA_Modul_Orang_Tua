@@ -8,15 +8,21 @@ public class LoginRecord {
     @SerializedName("Id")
     @Expose
     private String id;
-    @SerializedName("Nama")
+    @SerializedName("User_Login")
     @Expose
-    private String nama;
-    @SerializedName("No Hp")
+    private String userLogin;
+    @SerializedName("Display_Name")
     @Expose
-    private String noHp;
+    private String displayName;
     @SerializedName("Foto")
     @Expose
     private String foto;
+    @SerializedName("Token")
+    @Expose
+    private String token;
+    @SerializedName("JWT")
+    @Expose
+    private String jWT;
 
     public String getId() {
         return id;
@@ -26,20 +32,20 @@ public class LoginRecord {
         this.id = id;
     }
 
-    public String getNama() {
-        return nama;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
-    public String getNoHp() {
-        return noHp;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setNoHp(String noHp) {
-        this.noHp = noHp;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getFoto() {
@@ -48,6 +54,22 @@ public class LoginRecord {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getJWT() {
+        return jWT;
+    }
+
+    public void setJWT(String jWT) {
+        this.jWT = jWT;
     }
 
 }

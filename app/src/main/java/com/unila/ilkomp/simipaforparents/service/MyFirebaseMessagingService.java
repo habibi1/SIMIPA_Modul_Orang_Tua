@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,10 +16,13 @@ import android.graphics.Rect;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -52,21 +56,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        // [START_EXCLUDE]
-        // There are two types of messages data messages and notification messages. Data messages
-        // are handled
-        // here in onMessageReceived whether the app is in the foreground or background. Data
-        // messages are the type
-        // traditionally used with GCM. Notification messages are only received here in
-        // onMessageReceived when the app
-        // is in the foreground. When the app is in the background an automatically generated
-        // notification is displayed.
-        // When the user taps on the notification they are returned to the app. Messages
-        // containing both notification
-        // and data payloads are treated as notification messages. The Firebase console always
-        // sends notification
-        // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
-        // [END_EXCLUDE]
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
@@ -82,14 +71,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String department = remoteMessage.getData().get("department");
         String path = remoteMessage.getData().get("path");
 
-/*        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(getApplicationContext())
-                        .setSmallIcon(R.drawable.intro_logo)
-                        .setContentTitle(title)
-                        .setContentText(message);
-        NotificationManager manager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(0, builder.build());*/
-
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
@@ -104,9 +85,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         Intent broadcastIntentApproved = new Intent(this, NotificationApprovedRequestReceiver.class);
+        broadcastIntentApproved.putExtra("id", id);
         broadcastIntentApproved.putExtra("user", user);
         broadcastIntentApproved.putExtra("name", name);
         broadcastIntentApproved.putExtra("department", department);
+        broadcastIntentApproved.putExtra("path", path);
         broadcastIntentApproved.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent actionIntentApproved = PendingIntent.getBroadcast(this,
                 0, broadcastIntentApproved, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -153,12 +136,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(channel);
         }
 
-        assert user != null;
         assert notificationManager != null;
-        notificationManager.notify(Integer.parseInt(user), notificationBuilder.build());
+        assert id != null;
+        notificationManager.notify(Integer.parseInt(id), notificationBuilder.build());
 
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
     }
 
     private Bitmap getCircleBitmap(Bitmap bitmapFromURL) {
@@ -264,16 +245,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         ApiService apiService = Client.getClient().create(ApiService.class);
 
-        Call<UpdateTokenResponce> updateToken = apiService.updateToken(SharedPrefManager.getPhoneNumberLoggedInUser(getApplicationContext()), token);
+        String imei = getUniqueIMEIId(getApplicationContext());
+
+        Call<UpdateTokenResponce> updateToken = apiService.updateToken(SharedPrefManager.getPhoneNumberLoggedInUser(getApplicationContext()), imei, token);
         updateToken.enqueue(new Callback<UpdateTokenResponce>() {
             @Override
             public void onResponse(Call<UpdateTokenResponce> call, retrofit2.Response<UpdateTokenResponce> response) {
 
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     assert response.body() != null;
-                    if (response.body().getResponseCode() == 200){
+                    if (response.body().getResponseCode() == 200) {
 
-                        if (response.body().getTotalRecords() > 0){
+                        if (response.body().getTotalRecords() > 0) {
                             Log.d(TAG, "Success Refreshed token to Server: " + token);
                         } else {
                             Log.d(TAG, "Failed Refreshed token to Server: " + token);
@@ -295,39 +278,29 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     }
 
-    /**
-     * Create and show a simple notification containing the received FCM message.
-     *
-     * @param messageBody FCM message body received.
-     */
-/*    private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 *//* Request code *//*, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+    public String getUniqueIMEIId(Context context) {
 
-        String channelId = getString(R.string.default_notification_channel_id);
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.ic_stat_ic_notification)
-                        .setContentTitle(getString(R.string.fcm_message))
-                        .setContentText(messageBody)
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String imei;
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
 
-        // Since android Oreo notification channel is needed.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(channelId,
-                    "Channel human readable title",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationManager.createNotificationChannel(channel);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                imei = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                imei = telephonyManager.getImei();
+            } else {
+                imei = telephonyManager.getDeviceId();
+            }
+
+            if (imei != null && !imei.isEmpty()) {
+                return imei;
+            } else {
+                return android.os.Build.SERIAL;
+            }
+
         }
 
-        notificationManager.notify(0 *//* ID of notification *//*, notificationBuilder.build());
-    }*/
+        return "not_found";
+    }
 }

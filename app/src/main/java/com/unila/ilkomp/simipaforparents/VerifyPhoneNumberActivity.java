@@ -148,7 +148,7 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
                 // Update the UI and attempt sign in with the phone credential
                 updateUI(STATE_VERIFY_SUCCESS, credential);
                 // [END_EXCLUDE]
-                signInWithPhoneAuthCredential(credential);
+                phoneAuthCredential(credential);
 
             }
 
@@ -236,11 +236,10 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
                         checkPhoneNumberStatus(codeCountri.getText().toString().trim() + phoneNumber.getText().toString().trim());
                     } else {
                         ShowPopUp();
-                        Toast toast = Toast.makeText(VerifyPhoneNumberActivity.this, "Timer belum selesai", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(VerifyPhoneNumberActivity.this, getString(R.string.timer_belum_selesai), Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     }
-//                    updateUItoRegister();
                 }
                 break;
         }
@@ -259,12 +258,12 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
             @Override
             public void onResponse(Call<VerifyPhoneNumberRecord> call, retrofit2.Response<VerifyPhoneNumberRecord> response) {
 
-                if (response.code() != 500){
-                    if (response.code() == 200){
+                if (response.isSuccessful()) {
+                    if (response.code() == 200) {
 
                         startPhoneNumberVerification(phoneNumberConcate);
 
-                    } else if (response.code() == 400){
+                    } else if (response.code() == 400) {
 
                         codeCountri.setEnabled(true);
                         phoneNumber.setEnabled(true);
@@ -272,7 +271,7 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
                         progressBar.setVisibility(View.GONE);
                         sendCodeOTP.setVisibility(View.VISIBLE);
 
-                        text_message = "Nomor sudah terdaftar.";
+                        text_message = getString(R.string.nomor_sudah_terdaftar);
                         setToast = false;
 
                         showToastOrSnackbar(text_message, setToast);
@@ -284,7 +283,7 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
 
                     progressBar.setVisibility(View.GONE);
                     sendCodeOTP.setVisibility(View.VISIBLE);
-                    Snackbar.make(findViewById(android.R.id.content), "Server Error",
+                    Snackbar.make(findViewById(android.R.id.content), getString(R.string.server_error),
                             Snackbar.LENGTH_SHORT).show();
                 }
             }
@@ -380,7 +379,7 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
         // [START verify_with_code]
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
         // [END verify_with_code]
-        signInWithPhoneAuthCredential(credential);
+        phoneAuthCredential(credential);
     }
 
     // [START resend_verification]
@@ -398,7 +397,7 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
     // [END resend_verification]
 
     // [START sign_in_with_phone]
-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+    private void phoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

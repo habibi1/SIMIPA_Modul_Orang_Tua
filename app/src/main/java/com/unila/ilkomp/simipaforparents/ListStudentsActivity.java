@@ -1,13 +1,11 @@
 package com.unila.ilkomp.simipaforparents;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -16,8 +14,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,7 +28,8 @@ import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
 import com.unila.ilkomp.simipaforparents.ui.profile.ProfileViewModel;
 
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,19 +45,15 @@ public class ListStudentsActivity extends AppCompatActivity implements View.OnCl
     LinearLayout dataEmpty;
     TextView dataStatus;
 
+    List<StudentRecord> studentRecordsApproved = new ArrayList<>();
+    List<StudentRecord> studentRecordsRequest = new ArrayList<>();
+    List<StudentRecord> studentRecordsReject = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_students);
 
-        @SuppressLint("HardwareIds")
-        String androidId = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-
-        Toast.makeText(this, androidId, Toast.LENGTH_LONG).show();
-
-        Log.d("id 1", androidId);
-        Log.d("id 2", UUID.randomUUID().toString());
 
         //make translucent statusBar on kitkat devices
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
@@ -126,37 +121,61 @@ public class ListStudentsActivity extends AppCompatActivity implements View.OnCl
         Call<StudentsResponce> call = apiInterface.listMahasiswa(SharedPrefManager.getPhoneNumberLoggedInUser(getBaseContext()));
         call.enqueue(new Callback<StudentsResponce>() {
 
-             @Override
-             public void onResponse(Call<StudentsResponce> call, retrofit2.Response<StudentsResponce> response) {
+            @Override
+            public void onResponse(@NonNull Call<StudentsResponce> call, @NonNull retrofit2.Response<StudentsResponce> response) {
 
-                 recyclerView.setVisibility(View.VISIBLE);
-                 dataEmpty.setVisibility(View.GONE);
-                 progressBar.setVisibility(View.GONE);
+                if (response.isSuccessful()) {
 
-                 if (response.isSuccessful()) {
-                     listStudentAdapter = new ListStudentAdapter(getApplicationContext());
-                     listStudentAdapter.setListStudents(response.body().getStudentRecords());
-                     listStudentAdapter.notifyDataSetChanged();
-                     recyclerView.setAdapter(listStudentAdapter);
+                    if (response.body().getTotalRecords() > 0) {
 
-                     listStudentAdapter.setOnItemClickCallback(new ListStudentAdapter.OnItemClickCallback() {
-                         @Override
-                         public void onItemClicked(StudentRecord data) {
-                             showSelected(data);
-                         }
-                     });
-                 } else {
-                     recyclerView.setVisibility(View.GONE);
-                     dataEmpty.setVisibility(View.VISIBLE);
-                     progressBar.setVisibility(View.GONE);
-                 }
+                        recyclerView.setVisibility(View.VISIBLE);
+                        dataEmpty.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
+
+                        assert response.body() != null;
+                        for (StudentRecord studentRecord : response.body().getStudentRecords()) {
+
+                            if (studentRecord.getStatus().contains("Belum")) {
+                                studentRecordsRequest.add(studentRecord);
+                            } else if (studentRecord.getStatus().contains("Ditolak")) {
+                                studentRecordsReject.add(studentRecord);
+                            } else {
+                                studentRecordsApproved.add(studentRecord);
+                            }
+                        }
+
+                        studentRecordsApproved.addAll(studentRecordsRequest);
+
+                        listStudentAdapter = new ListStudentAdapter(getApplicationContext());
+                        listStudentAdapter.setListStudents(studentRecordsApproved);
+                        listStudentAdapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(listStudentAdapter);
+
+                        listStudentAdapter.setOnItemClickCallback(new ListStudentAdapter.OnItemClickCallback() {
+                            @Override
+                            public void onItemClicked(StudentRecord data) {
+                                showSelected(data);
+                            }
+                        });
+                    } else {
+                        recyclerView.setVisibility(View.GONE);
+                        dataEmpty.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+                } else {
+                    recyclerView.setVisibility(View.GONE);
+                    dataEmpty.setVisibility(View.VISIBLE);
+                    dataStatus.setText(getString(R.string.terjadi_kesalahan));
+                    progressBar.setVisibility(View.GONE);
+                }
              }
 
              @Override
              public void onFailure(Call<StudentsResponce> call, Throwable t) {
                  recyclerView.setVisibility(View.GONE);
                  dataEmpty.setVisibility(View.VISIBLE);
-                 dataStatus.setText("Error");
+                 dataStatus.setText(getString(R.string.server_error));
                  progressBar.setVisibility(View.GONE);
                  Log.d("c", t.getMessage());
              }
@@ -178,6 +197,12 @@ public class ListStudentsActivity extends AppCompatActivity implements View.OnCl
         SharedPrefManager.setImageStudentChoosed(this, images);
 
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
     }
 }
 

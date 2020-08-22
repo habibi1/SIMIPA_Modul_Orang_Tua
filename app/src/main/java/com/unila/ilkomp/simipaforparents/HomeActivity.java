@@ -1,6 +1,5 @@
 package com.unila.ilkomp.simipaforparents;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 
@@ -41,13 +40,5 @@ public class HomeActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         active = false;
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finishAffinity();
-        Intent intent = new Intent(this, ListStudentsActivity.class);
-        startActivity(intent);
     }
 }

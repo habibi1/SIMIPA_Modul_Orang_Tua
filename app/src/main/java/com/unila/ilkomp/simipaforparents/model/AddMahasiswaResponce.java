@@ -16,12 +16,12 @@ public class AddMahasiswaResponce {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("id_relasi")
+    @Expose
+    private String idRelasi;
     @SerializedName("Total_records")
     @Expose
     private Integer totalRecords;
-    @SerializedName("id")
-    @Expose
-    private String id;
     @SerializedName("records")
     @Expose
     private List<AddMahasiswaRecord> records = null;
@@ -58,12 +58,12 @@ public class AddMahasiswaResponce {
         this.totalRecords = totalRecords;
     }
 
-    public String getId() {
-        return id;
+    public String getIdRelasi() {
+        return idRelasi;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdRelasi(String idRelasi) {
+        this.idRelasi = idRelasi;
     }
 
     public List<AddMahasiswaRecord> getRecords() {

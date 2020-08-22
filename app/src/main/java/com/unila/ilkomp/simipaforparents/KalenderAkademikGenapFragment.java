@@ -90,8 +90,8 @@ public class KalenderAkademikGenapFragment extends Fragment {
 
         ApiService apiInterface = Client.getClient().create(ApiService.class);
 
-        Call<KalenderAkademikResponce> call = apiInterface.kalenderAkademik(semester, tahunAkademik);
-        call.enqueue(new Callback<KalenderAkademikResponce>() {
+        Call<KalenderAkademikResponce> kalenderAkademik = apiInterface.kalenderAkademik(semester, tahunAkademik);
+        kalenderAkademik.enqueue(new Callback<KalenderAkademikResponce>() {
 
             @Override
             public void onResponse(Call<KalenderAkademikResponce> call, retrofit2.Response<KalenderAkademikResponce> response) {

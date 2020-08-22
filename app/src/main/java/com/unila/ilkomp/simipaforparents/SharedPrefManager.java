@@ -15,28 +15,46 @@ public class SharedPrefManager {
     static final String KEY_DEPARTMENT_STUDENT_CHOOSED = "department_student_choosed";
     static final String KEY_IMAGE_STUDENT_CHOOSED = "image_student_choosed";
     static final String KEY_IMAGE_PARENT = "image_parent";
+    static final String KEY_JWT = "JWT";
 
     /** Pendlakarasian Shared Preferences yang berdasarkan paramater context */
     private static SharedPreferences getSharedPreference(Context context){
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    /** Deklarasi Edit Preferences dan mengubah data
-     *  yang memiliki key isi KEY_USER_TEREGISTER dengan parameter username */
-    public static void setPhoneNumberLoggedInUser(Context context, String username){
+    /**
+     * Deklarasi Edit Preferences dan mengubah data
+     * yang memiliki key isi KEY_USER_TEREGISTER dengan parameter username
+     */
+    public static void setPhoneNumberLoggedInUser(Context context, String username) {
         SharedPreferences.Editor editor = getSharedPreference(context).edit();
         editor.putString(KEY_NO_TELEPON, username);
         editor.apply();
     }
 
-    /** Mengembalikan nilai dari key KEY_USER_TEREGISTER berupa String */
-    public static String getPhoneNumberLoggedInUser(Context context){
-        return getSharedPreference(context).getString(KEY_NO_TELEPON,"");
+    /**
+     * Mengembalikan nilai dari key KEY_USER_TEREGISTER berupa String
+     */
+    public static String getJWT(Context context) {
+        return getSharedPreference(context).getString(KEY_JWT, "");
     }
 
-    public static void setImageParent(Context context, String image){
+    public static void setJWT(Context context, String jWT) {
         SharedPreferences.Editor editor = getSharedPreference(context).edit();
-        editor.putString(KEY_IMAGE_PARENT, BuildConfig.BASE_IMAGE + image);
+        editor.putString(KEY_JWT, jWT);
+        editor.apply();
+    }
+
+    /**
+     * Mengembalikan nilai dari key KEY_USER_TEREGISTER berupa String
+     */
+    public static String getPhoneNumberLoggedInUser(Context context) {
+        return getSharedPreference(context).getString(KEY_NO_TELEPON, "");
+    }
+
+    public static void setImageParent(Context context, String image) {
+        SharedPreferences.Editor editor = getSharedPreference(context).edit();
+        editor.putString(KEY_IMAGE_PARENT, BuildConfig.BASE_API + image.replace("/home/fmipaunila/public_html/", ""));
         editor.apply();
     }
 

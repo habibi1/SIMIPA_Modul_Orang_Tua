@@ -41,6 +41,16 @@ public class AchievementRecord {
     @Expose
     private String jabatan;
 
+    public AchievementRecord(String npm, String namaKegiatan, String tingkat, String prestasi, String tahunPrestasi, String penyelenggara, String jabatan) {
+        this.npm = npm;
+        this.namaKegiatan = namaKegiatan;
+        this.tingkat = tingkat;
+        this.prestasi = prestasi;
+        this.tahunPrestasi = tahunPrestasi;
+        this.penyelenggara = penyelenggara;
+        this.jabatan = jabatan;
+    }
+
     public String getId() {
         return id;
     }

@@ -25,10 +25,10 @@ import com.unila.ilkomp.simipaforparents.AchievementActivity;
 import com.unila.ilkomp.simipaforparents.ImportantDateActivity;
 import com.unila.ilkomp.simipaforparents.PresenceActivity;
 import com.unila.ilkomp.simipaforparents.R;
-import com.unila.ilkomp.simipaforparents.SPPActivity;
 import com.unila.ilkomp.simipaforparents.ScheduleActivity;
 import com.unila.ilkomp.simipaforparents.ScholarshipActivity;
 import com.unila.ilkomp.simipaforparents.SharedPrefManager;
+import com.unila.ilkomp.simipaforparents.StatusSemesterActivity;
 import com.unila.ilkomp.simipaforparents.StudyProgressActivity;
 import com.unila.ilkomp.simipaforparents.model.ProfileStudentRecord;
 import com.unila.ilkomp.simipaforparents.model.ProfileStudentResponce;
@@ -37,7 +37,6 @@ import com.unila.ilkomp.simipaforparents.retrofit.Client;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,7 +77,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        viewDialogProfileStudent = new Dialog(Objects.requireNonNull(getContext()));
+        viewDialogProfileStudent = new Dialog(requireContext());
         viewDialogProfileStudent.setContentView(R.layout.dialog_profile_student);
 
         viewProfileStudent = viewDialogProfileStudent.findViewById(R.id.view_profile_student);
@@ -107,7 +106,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         btn_presence = root.findViewById(R.id.btn_presence);
         btn_study_progress = root.findViewById(R.id.btn_study_progress);
         btn_achievement = root.findViewById(R.id.btn_achievement);
-        btn_spp = root.findViewById(R.id.btn_spp);
+        btn_spp = root.findViewById(R.id.btn_status_semester);
         btn_scholarship = root.findViewById(R.id.btn_scholarship);
         btn_important_date = root.findViewById(R.id.btn_important_date);
 
@@ -216,43 +215,40 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         switch (v.getId()){
             case R.id.btn_profile_student:
-                viewDialogProfileStudent.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                viewDialogProfileStudent.getWindow().setGravity(Gravity.CENTER);
-                viewDialogProfileStudent.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                viewDialogProfileStudent.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
-                viewDialogProfileStudent.show();
+                showDialogprofil();
                 break;
             case R.id.txtclose:
                 viewDialogProfileStudent.dismiss();
                 break;
             case R.id.btn_schedule:
-                Intent intentSchedule = new Intent(getActivity(), ScheduleActivity.class);
-                startActivity(intentSchedule);
+                startActivity(new Intent(getActivity(), ScheduleActivity.class));
                 break;
             case R.id.btn_presence:
-                Intent intentPresence = new Intent(getActivity(), PresenceActivity.class);
-                startActivity(intentPresence);
+                startActivity(new Intent(getActivity(), PresenceActivity.class));
                 break;
             case R.id.btn_study_progress:
-                Intent intentStudyProgress = new Intent(getActivity(), StudyProgressActivity.class);
-                startActivity(intentStudyProgress);
+                startActivity(new Intent(getActivity(), StudyProgressActivity.class));
                 break;
             case R.id.btn_achievement:
-                Intent intentAchievement = new Intent(getActivity(), AchievementActivity.class);
-                startActivity(intentAchievement);
+                startActivity(new Intent(getActivity(), AchievementActivity.class));
                 break;
-            case R.id.btn_spp:
-                Intent intentThesis = new Intent(getActivity(), SPPActivity.class);
-                startActivity(intentThesis);
+            case R.id.btn_status_semester:
+                startActivity(new Intent(getActivity(), StatusSemesterActivity.class));
                 break;
             case R.id.btn_scholarship:
-                Intent intentScholarship = new Intent(getActivity(), ScholarshipActivity.class);
-                startActivity(intentScholarship);
+                startActivity(new Intent(getActivity(), ScholarshipActivity.class));
                 break;
             case R.id.btn_important_date:
-                Intent intentImportantDate = new Intent(getActivity(), ImportantDateActivity.class);
-                startActivity(intentImportantDate);
+                startActivity(new Intent(getActivity(), ImportantDateActivity.class));
                 break;
         }
+    }
+
+    private void showDialogprofil() {
+        viewDialogProfileStudent.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        viewDialogProfileStudent.getWindow().setGravity(Gravity.CENTER);
+        viewDialogProfileStudent.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        viewDialogProfileStudent.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
+        viewDialogProfileStudent.show();
     }
 }

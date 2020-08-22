@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/transparent">
@@ -149,7 +147,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/jenis_beasiswa"
+                        android:text="@string/penyelenggara"
                         android:textSize="@dimen/dialog_mini_title"
                         android:textColor="@color/colorPrimary"/>
 
@@ -157,7 +155,7 @@
                         android:id="@+id/tv_jenis_beasiswa"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/jenis_beasiswa"
+                        android:text="@string/penyelenggara"
                         android:textSize="@dimen/text_value_dialog"
                         android:textColor="@color/colorBlack"/>
 
