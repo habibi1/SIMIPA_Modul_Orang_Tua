@@ -13,7 +13,7 @@
 
     <uses-feature
         android:name="android.hardware.Camera2"
-        android:required="true" />
+        android:required="false" />
 
     <permission
         android:name="com.unila.ilkomp.simipaforparents.READ_DATABASE"
@@ -29,7 +29,9 @@
         android:roundIcon="@mipmap/ic_launcher_logo_unila_round"
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
-        android:theme="@style/AppTheme">
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:theme="@style/AppTheme"
+        tools:targetApi="q">
 
         <activity
             android:name=".ImportantDateActivity"

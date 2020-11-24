@@ -54,7 +54,6 @@ public class ListStudentsActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_students);
 
-
         //make translucent statusBar on kitkat devices
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
@@ -80,9 +79,14 @@ public class ListStudentsActivity extends AppCompatActivity implements View.OnCl
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        getData();
-
         addStudent.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getData();
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -131,6 +135,10 @@ public class ListStudentsActivity extends AppCompatActivity implements View.OnCl
                         recyclerView.setVisibility(View.VISIBLE);
                         dataEmpty.setVisibility(View.GONE);
                         progressBar.setVisibility(View.GONE);
+
+                        studentRecordsApproved.clear();
+                        studentRecordsRequest.clear();
+                        studentRecordsReject.clear();
 
                         assert response.body() != null;
                         for (StudentRecord studentRecord : response.body().getStudentRecords()) {

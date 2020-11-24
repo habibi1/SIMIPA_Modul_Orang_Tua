@@ -22,7 +22,6 @@ import com.unila.ilkomp.simipaforparents.util.TimeUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-
 public class KalenderAkademikGenapFragment extends Fragment {
 
     RecyclerView recyclerView;

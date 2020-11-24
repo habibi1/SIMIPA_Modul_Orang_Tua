@@ -82,7 +82,7 @@ public class AddMahasiswaActivity extends AppCompatActivity implements View.OnCl
                         //send notification
 
                         for (AddMahasiswaRecord addMahasiswaRecord : response.body().getRecords()) {
-                            if (!addMahasiswaRecord.getToken().isEmpty()) {
+                            if (addMahasiswaRecord.getToken() != null) {
                                 NotificationControl.sendNotifications(getApplicationContext(),
                                         addMahasiswaRecord.getToken(),
                                         getResources().getString(R.string.student_notification_title_id_1),

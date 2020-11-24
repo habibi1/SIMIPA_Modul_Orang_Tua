@@ -141,28 +141,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:rowCount="4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_profile_student">
+            android:layout_marginTop="10dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_schedule"
-                style="@style/CardView.Light"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="5dp"
+                android:layout_margin="5dp"
                 android:clickable="true"
                 android:elevation="0dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
-                tools:ignore="MissingConstraints">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -174,7 +168,7 @@
                         android:id="@+id/logo_jadwal"
                         android:layout_width="110dp"
                         android:layout_height="110dp"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_gravity="center"
                         android:background="@drawable/logo_gradient_background"
                         android:padding="10dp"
                         android:src="@drawable/ic_calendar_clock" />
@@ -194,23 +188,17 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_presence"
-                style="@style/CardView.Light"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="16dp"
+                android:layout_gravity="fill"
                 android:layout_marginRight="16dp"
+                android:layout_margin="5dp"
                 android:clickable="true"
                 android:elevation="0dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.49"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/parents_name"
-                tools:ignore="MissingConstraints">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -241,25 +229,17 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_study_progress"
-                style="@style/CardView.Light"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
+                android:layout_gravity="fill"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
+                android:layout_margin="5dp"
                 android:clickable="true"
                 android:elevation="0dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.49"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/parents_name"
-
-                tools:ignore="MissingConstraints">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -291,24 +271,17 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_achievement"
                 style="@style/CardView.Light"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_gravity="fill"
                 android:layout_marginRight="16dp"
+                android:layout_margin="5dp"
                 android:clickable="true"
                 android:elevation="0dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.49"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/parents_name"
-
-                tools:ignore="MissingConstraints">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -340,24 +313,17 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_scholarship"
                 style="@style/CardView.Light"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="fill"
                 android:layout_columnWeight="1"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_margin="5dp"
                 android:clickable="true"
                 android:elevation="0dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.49"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/parents_name"
-
-                tools:ignore="MissingConstraints">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -389,24 +355,17 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_status_semester"
                 style="@style/CardView.Light"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="fill"
                 android:layout_columnWeight="1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="16dp"
+                android:layout_margin="5dp"
                 android:clickable="true"
                 android:elevation="0dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.49"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/parents_name"
-
-                tools:ignore="MissingConstraints">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -439,26 +398,20 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_important_date"
                 style="@style/CardView.Light"
-                android:layout_width="180dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
                 android:layout_columnSpan="2"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="21dp"
-                android:layout_marginLeft="21dp"
                 android:clickable="true"
                 android:layout_gravity="center_horizontal"
                 android:elevation="0dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gridLayout"
-                tools:ignore="MissingConstraints">
+                android:focusable="true">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:padding="10dp">
@@ -469,14 +422,15 @@
                         android:layout_gravity="center"
                         android:background="@drawable/logo_gradient_background"
                         android:padding="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:src="@drawable/ic_event_white" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:gravity="center_horizontal"
                         android:text="@string/tanggal_penting"
+                        android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:textSize="8pt" />
 

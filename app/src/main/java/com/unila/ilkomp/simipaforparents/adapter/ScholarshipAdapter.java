@@ -58,18 +58,18 @@ public class ScholarshipAdapter extends RecyclerView.Adapter<ScholarshipAdapter.
     @Override
     public void onBindViewHolder(@NonNull final ScholarshipAdapter.ListViewHolder holder, int position) {
         ScholarshipRecord scholarshipRecord = listScholarship.get(position);
-        holder.status.setText(scholarshipRecord.getStatusAjukan());
+        holder.status.setText(scholarshipRecord.getStatus());
         holder.nameScholarship.setText(scholarshipRecord.getNamaBeasiswa());
         holder.semester.setText("Semester " + scholarshipRecord.getSemester());
-        holder.yearScholarship.setText(scholarshipRecord.getTahunBeasiswa());
+        holder.yearScholarship.setText(scholarshipRecord.getTahun());
 
-        if (scholarshipRecord.getStatusAjukan().toLowerCase().contains(context.getString(R.string.diterima_lower))) {
+        if (scholarshipRecord.getStatus().toLowerCase().contains(context.getString(R.string.diterima_lower))) {
             holder.imageView_dialog_status.setImageResource(R.drawable.ic_check_circle_green_24dp);
             holder.imageView_status.setImageResource(R.drawable.ic_check_circle_green_24dp);
-        } else if (scholarshipRecord.getStatusAjukan().toLowerCase().contains(context.getString(R.string.diajukan_lower))) {
+        } else if (scholarshipRecord.getStatus().toLowerCase().contains(context.getString(R.string.diajukan_lower))) {
             holder.imageView_dialog_status.setImageResource(R.drawable.ic_baseline_assignment_turned);
             holder.imageView_status.setImageResource(R.drawable.ic_baseline_assignment_turned);
-        } else if (scholarshipRecord.getStatusAjukan().toLowerCase().contains(context.getString(R.string.ditolak_lower))) {
+        } else if (scholarshipRecord.getStatus().toLowerCase().contains(context.getString(R.string.ditolak_lower))) {
             holder.imageView_dialog_status.setImageResource(R.drawable.ic_cancel_red_24dp);
             holder.imageView_status.setImageResource(R.drawable.ic_cancel_red_24dp);
         }
@@ -84,10 +84,10 @@ public class ScholarshipAdapter extends RecyclerView.Adapter<ScholarshipAdapter.
 
                 holder.dialogNamaMahasiswa.setText(SharedPrefManager.getNameStudentChoosed(context));
                 holder.dialogNPMMahasiswa.setText(scholarshipRecord.getNpm());
-                holder.dialogStatusAjukan.setText(scholarshipRecord.getStatusAjukan());
+                holder.dialogStatusAjukan.setText(scholarshipRecord.getStatus());
                 holder.dialogNamaBeasiswa.setText(scholarshipRecord.getNamaBeasiswa());
-                holder.dialogJenisBeasiswa.setText(scholarshipRecord.getJenisBeasiswa());
-                holder.dialogTahunBeasiswa.setText(scholarshipRecord.getTahunBeasiswa());
+                holder.dialogJenisBeasiswa.setText(scholarshipRecord.getPenyelenggara());
+                holder.dialogTahunBeasiswa.setText(scholarshipRecord.getTahun());
                 holder.dialogSemesterBeasiswa.setText(scholarshipRecord.getSemester());
                 holder.dialogKeteranganBeasiswa.setText(scholarshipRecord.getKeterangan());
 

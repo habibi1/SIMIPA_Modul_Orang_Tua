@@ -14,14 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unila.ilkomp.simipaforparents.adapter.ScheduleAdapter;
-import com.unila.ilkomp.simipaforparents.model.ScheduleRecord;
 import com.unila.ilkomp.simipaforparents.model.ScheduleResponce;
 import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
 import com.unila.ilkomp.simipaforparents.util.TimeUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,7 +57,7 @@ public class MondayScheduleFragment extends Fragment {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+/*
         progressBar.setVisibility(View.GONE);
         ScheduleRecord scheduleRecord1 = new ScheduleRecord("Mobile Lanjut", "GIK L1C", "Ardiansyah, S.Kom., M.Kom.", "07:30:00", "09:10:00", "praktikum");
         ScheduleRecord scheduleRecord2 = new ScheduleRecord("Matematika Diskrit", "GIK L1A", "Dr. Eng. Admi Syarif", "09:20:00", "11:00:00", "teori");
@@ -78,8 +74,8 @@ public class MondayScheduleFragment extends Fragment {
         scheduleAdapter.setSchedule(coba);
         scheduleAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(scheduleAdapter);
-
-        //getData();
+*/
+        getData();
 
         return root;
     }

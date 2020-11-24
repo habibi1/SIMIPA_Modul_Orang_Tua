@@ -13,14 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unila.ilkomp.simipaforparents.adapter.KalenderAkademikAdapter;
-import com.unila.ilkomp.simipaforparents.model.KalenderAkademikRecord;
 import com.unila.ilkomp.simipaforparents.model.KalenderAkademikResponce;
 import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
 import com.unila.ilkomp.simipaforparents.util.TimeUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,6 +79,7 @@ public class ImportantDateGanjilFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+/*
         progressBar.setVisibility(View.GONE);
         KalenderAkademikRecord kalenderAkademikRecord1 = new KalenderAkademikRecord("Pembayaran UKT", "2020-07-20", "2020-08-21");
         KalenderAkademikRecord kalenderAkademikRecord2 = new KalenderAkademikRecord("Awal Perkuliahan", "2020-09-28", "2020-09-28");
@@ -109,8 +106,9 @@ public class ImportantDateGanjilFragment extends Fragment {
         kalenderAkademikAdapter.setListKalenderAkademik(coba);
         kalenderAkademikAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(kalenderAkademikAdapter);
+*/
 
-        //getData();
+        getData();
 
         // Inflate the layout for this fragment
         return root;

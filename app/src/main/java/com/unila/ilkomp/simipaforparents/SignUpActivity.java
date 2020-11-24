@@ -39,6 +39,7 @@ import com.unila.ilkomp.simipaforparents.model.SignUpResponce;
 import com.unila.ilkomp.simipaforparents.model.UploadImageResponce;
 import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
+import com.unila.ilkomp.simipaforparents.util.RealPathUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -69,18 +70,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private static final int STATE_SIGNIN_SUCCESS = 6;
     private static final int STATE_READ_EXTERNAL_STORAGE = 7;
 
-    private long mLastClickTime = 0;
-
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSION_STORAGE = {
+    private static final String[] PERMISSION_STORAGE = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private final long mLastClickTime = 0;
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
-
-    private boolean mVerificationInProgress = false;
+    private final boolean mVerificationInProgress = false;
     private String mVerificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
@@ -409,7 +409,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void registerUser() {
 
-        String filePath = getRealPathFromURIPath(imageUri, SignUpActivity.this);
+        String filePath = RealPathUtil.getRealPath(SignUpActivity.this, imageUri);
         File file = new File(filePath);
 
         RequestBody mFile = RequestBody.create(MediaType.parse("multipart/form-data"), file); //membungkus file ke dalam request body

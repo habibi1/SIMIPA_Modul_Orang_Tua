@@ -38,12 +38,10 @@ import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class ListStudentDeleteAdapter extends RecyclerView.Adapter<ListStudentDeleteAdapter.ListViewHolder> implements View.OnClickListener {
+public class ListStudentDeleteAdapter extends RecyclerView.Adapter<ListStudentDeleteAdapter.ListViewHolder> {
 
-    ListStudentDeleteAdapter.ListViewHolder holder;
-    StudentRecord student;
     private Boolean reload = false;
-    private List<StudentRecord> listStudents = new ArrayList<>();
+    private final List<StudentRecord> listStudents = new ArrayList<>();
     Context context;
 
     Fragment fragment;
@@ -68,23 +66,27 @@ public class ListStudentDeleteAdapter extends RecyclerView.Adapter<ListStudentDe
 
     @Override
     public void onBindViewHolder(@NonNull ListStudentDeleteAdapter.ListViewHolder holder, int position) {
-        this.holder = holder;
+        //this.holder = holder;
 
-        student = listStudents.get(position);
-        holder.nama.setText(student.getNameStudent());
-        holder.npm.setText(student.getNPM());
+        holder.nama.setText(listStudents.get(position).getNameStudent());
+        holder.npm.setText(listStudents.get(position).getNPM());
 
         Glide.with(context)
-                .load(student.getFoto())
+                .load(listStudents.get(position).getFoto())
                 .placeholder(R.drawable.ic_person_white)
                 .into(holder.foto);
 
-        if (student.getStatus().contains(context.getString(R.string.belum))) {
+        if (listStudents.get(position).getNPM().equals(SharedPrefManager.getNPMChoosed(context))) {
+            holder.confirm.setVisibility(View.VISIBLE);
+            holder.cancelRequest.setVisibility(View.GONE);
+            holder.delete.setVisibility(View.GONE);
+            holder.confirm.setText(context.getString(R.string.null_string));
+        } else if (listStudents.get(position).getStatus().contains(context.getString(R.string.belum))) {
             holder.confirm.setVisibility(View.VISIBLE);
             holder.cancelRequest.setVisibility(View.VISIBLE);
             holder.delete.setVisibility(View.GONE);
             holder.confirm.setText(context.getString(R.string.belum_dikonfirmasi));
-        } else if (student.getStatus().contains(context.getString(R.string.ditolak))) {
+        } else if (listStudents.get(position).getStatus().contains(context.getString(R.string.ditolak))) {
             holder.confirm.setVisibility(View.VISIBLE);
             holder.cancelRequest.setVisibility(View.GONE);
             holder.delete.setVisibility(View.VISIBLE);
@@ -96,12 +98,60 @@ public class ListStudentDeleteAdapter extends RecyclerView.Adapter<ListStudentDe
             holder.confirm.setText(context.getString(R.string.null_string));
         }
 
-        holder.delete.setOnClickListener(this);
-        holder.dialogCancel.setOnClickListener(this);
-        holder.dialogDelete.setOnClickListener(this);
-        holder.cancelRequest.setOnClickListener(this);
-        holder.dialogCancelRequest.setOnClickListener(this);
-        holder.dialogCancelCancelRequest.setOnClickListener(this);
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(holder.viewDialogConfirmDelete.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                holder.viewDialogConfirmDelete.getWindow().setGravity(Gravity.BOTTOM);
+                holder.viewDialogConfirmDelete.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                holder.viewDialogConfirmDelete.setCanceledOnTouchOutside(false);
+                holder.viewDialogConfirmDelete.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
+                holder.viewDialogConfirmDelete.show();
+            }
+        });
+
+        holder.dialogCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.viewDialogConfirmDelete.dismiss();
+
+                if (reload)
+                    ((ProfileFragment) fragment).getData();
+            }
+        });
+
+        holder.cancelRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(holder.viewDialogConfirmCancelRequest.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                holder.viewDialogConfirmCancelRequest.getWindow().setGravity(Gravity.BOTTOM);
+                holder.viewDialogConfirmCancelRequest.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                holder.viewDialogConfirmCancelRequest.setCanceledOnTouchOutside(false);
+                holder.viewDialogConfirmCancelRequest.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
+                holder.viewDialogConfirmCancelRequest.show();
+            }
+        });
+
+        holder.dialogCancelCancelRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.viewDialogConfirmCancelRequest.dismiss();
+            }
+        });
+
+        holder.dialogDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteData(listStudents.get(position).getNPM(), SharedPrefManager.getPhoneNumberLoggedInUser(context), holder);
+            }
+        });
+
+        holder.dialogCancelRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CancelRequest(listStudents.get(position).getNPM(), SharedPrefManager.getPhoneNumberLoggedInUser(context), holder);
+            }
+        });
     }
 
     @Override
@@ -109,44 +159,7 @@ public class ListStudentDeleteAdapter extends RecyclerView.Adapter<ListStudentDe
         return listStudents.size();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.delete:
-                Objects.requireNonNull(holder.viewDialogConfirmDelete.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                holder.viewDialogConfirmDelete.getWindow().setGravity(Gravity.BOTTOM);
-                holder.viewDialogConfirmDelete.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                holder.viewDialogConfirmDelete.setCanceledOnTouchOutside(false);
-                holder.viewDialogConfirmDelete.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
-                holder.viewDialogConfirmDelete.show();
-                break;
-            case R.id.cv_cancel:
-                holder.viewDialogConfirmDelete.dismiss();
-
-                if (reload)
-                    ((ProfileFragment) fragment).getData();
-                break;
-            case R.id.cv_delete:
-                DeleteData(student.getNPM(), SharedPrefManager.getPhoneNumberLoggedInUser(context), holder);
-                break;
-            case R.id.iv_cancel_request:
-                Objects.requireNonNull(holder.viewDialogConfirmCancelRequest.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                holder.viewDialogConfirmCancelRequest.getWindow().setGravity(Gravity.BOTTOM);
-                holder.viewDialogConfirmCancelRequest.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                holder.viewDialogConfirmCancelRequest.setCanceledOnTouchOutside(false);
-                holder.viewDialogConfirmCancelRequest.getWindow().setWindowAnimations(R.style.DialogAnimation_up_down);
-                holder.viewDialogConfirmCancelRequest.show();
-                break;
-            case R.id.cv_cancel_request:
-                CancelRequest(student.getNPM(), SharedPrefManager.getPhoneNumberLoggedInUser(context), holder);
-                break;
-            case R.id.cv_cancel_cancel_request:
-                holder.viewDialogConfirmCancelRequest.dismiss();
-                break;
-        }
-    }
-
-    public void DeleteData (String npm, String no_hp, @NonNull ListStudentDeleteAdapter.ListViewHolder holder) {
+    public void DeleteData(String npm, String no_hp, @NonNull ListStudentDeleteAdapter.ListViewHolder holder) {
 
         holder.dialogViewConfirmDelete.setVisibility(View.GONE);
         holder.dialogViewLoadingDelete.setVisibility(View.VISIBLE);
@@ -169,7 +182,7 @@ public class ListStudentDeleteAdapter extends RecyclerView.Adapter<ListStudentDe
                     if (response.body().getResponseCode() == 200) {
 
                         for (DeleteStudentRecord deleteStudentRecord : response.body().getRecords()) {
-                            if (!deleteStudentRecord.getToken().isEmpty()) {
+                            if (deleteStudentRecord.getToken() != null) {
                                 NotificationControl.sendNotifications(context,
                                         deleteStudentRecord.getToken(),
                                         context.getResources().getString(R.string.student_notification_title_id_2),
@@ -247,7 +260,7 @@ public class ListStudentDeleteAdapter extends RecyclerView.Adapter<ListStudentDe
                     if (response.body().getResponseCode() == 200) {
 
                         for (DeleteStudentRecord deleteStudentRecord : response.body().getRecords()) {
-                            if (!deleteStudentRecord.getToken().isEmpty()) {
+                            if (deleteStudentRecord.getToken() != null) {
                                 NotificationControl.sendNotifications(context,
                                         deleteStudentRecord.getToken(),
                                         context.getResources().getString(R.string.student_notification_title_id_3),

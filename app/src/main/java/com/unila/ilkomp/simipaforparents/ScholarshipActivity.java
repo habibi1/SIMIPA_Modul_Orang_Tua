@@ -19,7 +19,6 @@ import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -29,7 +28,7 @@ public class ScholarshipActivity extends AppCompatActivity {
 
     ScholarshipAdapter scholarshipAdapter;
     RecyclerView recyclerView;
-    private ArrayList<ScholarshipRecord> list = new ArrayList<>();
+    private final ArrayList<ScholarshipRecord> list = new ArrayList<>();
     ProgressBar progressBar;
     TextView dataEmpty;
     Toolbar toolbar;
@@ -53,6 +52,7 @@ public class ScholarshipActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+/*
 
         progressBar.setVisibility(View.GONE);
         ScholarshipRecord scheduleRecord1 = new ScholarshipRecord("1", "1617051103", "1", "2017", "BRI", "BRILian", "001", "Ditolak", "Bantuan biaya pendidikan");
@@ -66,7 +66,8 @@ public class ScholarshipActivity extends AppCompatActivity {
         scholarshipAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(scholarshipAdapter);
 
-        //getData();
+*/
+        getData();
 
     }
 

@@ -14,13 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.unila.ilkomp.simipaforparents.adapter.AchievementAdapter;
-import com.unila.ilkomp.simipaforparents.model.AchievementRecord;
 import com.unila.ilkomp.simipaforparents.model.AchievementResponce;
 import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
 import com.unila.ilkomp.simipaforparents.retrofit.Client;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,6 +75,7 @@ public class AchievementAcademicFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+/*
         progressBar.setVisibility(View.GONE);
         AchievementRecord scheduleRecord1 = new AchievementRecord("1617051103", "Gemastik", "Nasional", "Juara 1", "2016", "Ristekdikti", "Ketua");
         AchievementRecord scheduleRecord2 = new AchievementRecord("1617051103", "PIMNAS", "Nasional", "Juara 3", "2018", "Ristekdikti", "Ketua");
@@ -95,8 +92,9 @@ public class AchievementAcademicFragment extends Fragment {
         achievementAdapter.setAchievement(coba);
         achievementAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(achievementAdapter);
+*/
 
-        //getData();
+        getData();
 
         return root;
     }

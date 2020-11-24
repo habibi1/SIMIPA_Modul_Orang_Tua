@@ -1,5 +1,6 @@
 package com.unila.ilkomp.simipaforparents;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -32,6 +33,7 @@ import com.google.firebase.auth.FirebaseAuthActionCodeException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.unila.ilkomp.simipaforparents.model.VerifyPhoneNumberRecord;
 import com.unila.ilkomp.simipaforparents.retrofit.ApiService;
@@ -334,6 +336,17 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
     }
 
     private void startPhoneNumberVerification(String phoneNumber) {
+
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber(phoneNumber)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(this)                 // Activity (for callback binding)
+                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+
+/*
         // [START start_phone_auth]
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,        // Phone number to verify
@@ -342,6 +355,7 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
                 this,               // Activity (for callback binding)
                 mCallbacks);        // OnVerificationStateChangedCallbacks
         // [END start_phone_auth]
+*/
 
         mVerificationInProgress = true;
 
@@ -352,6 +366,7 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
         time = 60;
         new CountDownTimer(60000, 1000) {
 
+            @SuppressLint("SetTextI18n")
             public void onTick(long millisUntilFinished) {
                 tvTimer.setText("Timer: " + checkDigit(time));
                 waktu.setText("Timer: " + checkDigit(time));
